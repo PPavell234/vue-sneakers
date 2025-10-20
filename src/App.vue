@@ -66,6 +66,24 @@ const nextImage = () => {
       </p>
 
       <img src="/images/vi.png" alt="" class="w-full h-auto rounded-xl" />
+
+      <p>EXPLORE A DEEP DUNGEON</p>
+      <p>In SoulSteel, you assume the role of a daring, gear-craving relic hunter with the sole mission of exploring
+        treacherous dungeons
+        in the pursuit of glory and treasure. Your spoils give you resources and materials that allow you to evolve your
+        character, unlock
+        new abilities, grow in strength, and take on even tougher challenges. The more you extract, the better the
+        rewards! </p>
+      <p>Time is your greatest enemy. Or well, one of many enemies, actually! The undiscovered challenges held within
+        these dungeons
+        will test even the most seasoned adventurer with perplexing puzzles, treacherous traps, and mighty mobs hungry
+        for a fight – all
+        with the ability to end your journey suddenly and swiftly.  </p>
+      <p>But with risk comes the promise of rewards! Fortune favours the bold – those that venture the deepest will get
+        greater rewards,
+        and more plentiful resources. And better gear is an absolute necessity if you plan on conquering the progressive
+        challenges that
+        lie deep within these winding halls and corridors. </p>
     </div>
   </div>
 
