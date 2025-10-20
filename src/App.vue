@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import Header from './components/Header.vue'
 
 //-----------------------Слайдер
@@ -41,7 +41,9 @@ const togglePlay = () => {
   }
 }
 
+
 //---------------Реакция
+// (оставьте остальную часть скрипта без изменений — только часть реакций/GIF замените)
 const icons = [
   { default: '/icons/image_icon1(1).png', active: '/icons/image_icon1.webp' },
   { default: '/icons/image_icon2(2).png', active: '/icons/image_icon2.webp' },
@@ -51,33 +53,60 @@ const icons = [
 
 const activeIndex = ref(null)
 const counts = ref(icons.map(() => 0))
-const showGif = ref(false)
 
-// ✅ Рабочая функция selectIcon
-const selectIcon = (index) => {
-  // если нажали на ту же — сброс
+const showGif = ref(false)
+const gifKey = ref(0)
+let gifTimer = null
+
+// DEBUG helper (оставьте или уберите)
+const dbg = (...args) => console.log('[GIF]', ...args)
+
+/**
+ * selectIcon — надёжно перезапускает GIF при каждом включении.
+ * Убирает transition-эффекты как причину проблем (см. шаблон ниже).
+ */
+const selectIcon = async (index) => {
+  dbg('click', index, 'activeBefore', activeIndex.value, 'showGifBefore', showGif.value, 'gifKeyBefore', gifKey.value)
+
+  // если кликнули по той же — снимаем реакцию и скрываем GIF
   if (activeIndex.value === index) {
     activeIndex.value = null
     counts.value[index] = 0
+
+    // скрываем GIF и очищаем таймер
+    if (gifTimer) { clearTimeout(gifTimer); gifTimer = null }
     showGif.value = false
+    dbg('deactivate', index)
     return
   }
 
-  // сбрасываем все реакции
+  // активируем выбранную иконку (сбросим все счётчики)
   counts.value = counts.value.map(() => 0)
-
-  // активируем выбранную
   activeIndex.value = index
   counts.value[index] = 1
 
-  // показываем гифку
+  // Очищаем предыдущий таймер (если был)
+  if (gifTimer) { clearTimeout(gifTimer); gifTimer = null }
+
+  // Перезапускаем GIF: сначала скрываем (гарантированное удаление из DOM),
+  // ждём 2 nextTick чтобы быть уверенными, что элемент убран и ре-рендер произойдёт,
+  // увеличиваем ключ и показываем заново.
+  showGif.value = false
+  await nextTick()
+  await nextTick()      // в некоторых случаях нужен второй тик (убирает проблемы с переходами)
+  gifKey.value += 1
   showGif.value = true
 
-  // автоматически скрываем через 5 секунд
-  setTimeout(() => {
+  dbg('show', { index, gifKey: gifKey.value })
+
+  // Автоматическое скрытие через 5 сек (перезапишется при новом клике)
+  gifTimer = setTimeout(() => {
     showGif.value = false
+    gifTimer = null
+    dbg('auto-hide', index)
   }, 5000)
 }
+
 
 
 
@@ -86,6 +115,17 @@ const selectIcon = (index) => {
 
 
 <template>
+
+
+
+  <div v-if="showGif" class="fixed inset-0 bg-black/90 flex justify-center items-center z-[2000] p-4"
+    @click.self="showGif = false">
+    <img :key="gifKey" src="/video/ednder2New.gif" alt="Reaction"
+      class="max-w-full max-h-full object-contain rounded-lg shadow-lg" draggable="false" />
+  </div>
+
+
+
   <!-- Шапка -->
   <header class="bg-[#262423] w-full h-10 flex items-center px-4 md:px-10">
     <img src="/images/logo.png" alt="logo" class="h-6 md:h-8" />
