@@ -97,9 +97,13 @@ const nextImage = () => {
       <div class="vidio relative inline-block">
         <video id="myVideo" src="/video/videoplayback.mp4" class="w-full h-auto rounded-xl"></video>
 
+<<<<<<< HEAD
         <img id="playButton" src="/images/Group 1.png" alt="button"
           class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-opacity duration-300" />
       </div>
+=======
+      <img src="/images/vi.png" alt="" class="w-full h-auto rounded-xl" />
+>>>>>>> 7fb222425918fcb20baa24deaec8a070d8d56c57
 
       <p>EXPLORE A DEEP DUNGEON</p>
       <p>In SoulSteel, you assume the role of a daring, gear-craving relic hunter with the sole mission of exploring
