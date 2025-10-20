@@ -204,7 +204,7 @@ const nextImage = () => {
       <div class="pb-[17px]"></div>
     </div>
 
-    <div class="text-white bg-[#33302F] px-[200px] ">
+    <div class="text-white bg-[#33302F] px-[200px] pb-[300px] ">
       <!-- Блок с логотипами -->
       <div class="flex justify-between items-center">
         <div class="image-company flex items-center space-x-14">
@@ -229,8 +229,18 @@ const nextImage = () => {
     </div>
 
   </div>
-  <footer>
+  <footer class="flex justify-center items-center space-x-8 text-white py-4">
+    <img src="/images/Component 2.png" alt="" />
 
+    <div class="flex items-center space-x-2">
+      <p>Русский</p>
+      <img src="/images/UP2.png" alt="" />
+    </div>
+
+    <ul class="flex space-x-4 text-sm">
+      <li>Конфиденциальность и файлы cookie</li>
+      <li>© 2025 Microsoft</li>
+    </ul>
   </footer>
 
 
