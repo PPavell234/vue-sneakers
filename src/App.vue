@@ -86,12 +86,22 @@ const togglePlay = () => {
       </p>
       <div class="relative inline-block group" @mouseenter="showButton = true" @mouseleave="showButton = false">
         <!-- видео -->
-        <video ref="video" src="/video/videoplayback.mp4" class="w-full h-auto rounded-xl" playsinline></video>
+        <video ref="video" src="/video/videoplayback.mp4 " class="w-[800px] h-[450px] rounded-xl object-cover"
+          playsinline></video>
 
         <!-- кнопка поверх видео -->
         <img v-show="showButton" :src="isPlaying ? '/images/Pause.png' : '/images/Group 1.png'" alt="Play/Pause"
           @click="togglePlay"
           class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-opacity duration-300 opacity-80 hover:opacity-100 z-10" />
+      </div>
+
+      <div class="bg-[#262423] py-1">
+        <hr class="border-t-2 border-[#33302F] my-4 w-[100%] mx-auto" />
+      </div>
+
+
+      <div class="bg-[#262423] py-1">
+        <hr class="border-t-2 border-[#33302F] my-1 w-[90%] mx-auto" />
       </div>
 
 
