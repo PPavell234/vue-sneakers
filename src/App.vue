@@ -178,19 +178,29 @@ const nextImage = () => {
   </div>
 
   <div class="bg-[#262423]">
-    <ul class="flex justify-center items-center mt-0 mb-0 space-x-4 text-white h-[120px]">
+    <ul class="flex justify-center items-center mt-0 mb-0 space-x-4 text-white h-[150px]">
       <li>Поделиться этой историей</li>
       <img src="/images/Item.png" alt="">
       <img src="/images/Item-1.png" alt="">
       <img src="/images/Item-2.png" alt="">
     </ul>
 
-    <!-- нижняя часть -->
-    <div class="bg-[#33302F] h-[60px]"></div>
+    <div class="bg-[#33302F] text-white py-6">
+      <h1 class="flex justify-center text-lg mb-2">ПОДПИСАТЬСЯ НА MINECRAFT</h1>
+
+      <ul class="flex justify-center items-center space-x-4">
+        <li><img src="/images/Component 3.png" alt=""></li>
+        <li><img src="/images/Component 3-1.png" alt=""></li>
+        <li><img src="/images/Component 3-2.png" alt=""></li>
+        <li><img src="/images/Component 5.png" alt=""></li>
+        <li><img src="/images/Component 8.png" alt=""></li>
+      </ul>
+    </div>
+
+
   </div>
 
-  <div class="bg-[#262423] py-1">
-  </div>
+
 
 
 
