@@ -191,19 +191,23 @@ const selectIcon = (index) => {
 
     <!-- Изображения -->
     <div class="flex justify-center items-center gap-2 md:gap-4 flex-wrap">
-      <div class="w-[120px] md:w-[250px] lg:w-[384px] h-[120px] md:h-[250px] lg:h-[384px] overflow-hidden rounded-xl">
-        <img :src="images[(currentIndex + images.length - 1) % images.length]" alt="previous"
-          class="w-full h-full object-cover opacity-70" />
-      </div>
-
+      <!-- Левая (серая) -->
       <div
-        class="w-[150px] md:w-[300px] lg:w-[384px] h-[150px] md:h-[300px] lg:h-[384px] overflow-hidden rounded-xl shadow-lg">
-        <img :src="images[currentIndex]" alt="active" class="w-full h-full object-cover transition-all duration-500" />
+        class="w-[120px] md:w-[250px] lg:w-[384px] h-[120px] md:h-[250px] lg:h-[384px] overflow-hidden rounded-xl grayscale opacity-60 hover:opacity-80 transition-all duration-300">
+        <img :src="images[(currentIndex + images.length - 1) % images.length]" alt="previous"
+          class="w-full h-full object-cover" />
       </div>
 
-      <div class="w-[120px] md:w-[250px] lg:w-[384px] h-[120px] md:h-[250px] lg:h-[384px] overflow-hidden rounded-xl">
-        <img :src="images[(currentIndex + 1) % images.length]" alt="next"
-          class="w-full h-full object-cover opacity-70" />
+      <!-- Центральная (яркая) -->
+      <div
+        class="w-[150px] md:w-[300px] lg:w-[384px] h-[150px] md:h-[300px] lg:h-[384px] overflow-hidden rounded-xl shadow-lg transition-all duration-500">
+        <img :src="images[currentIndex]" alt="active" class="w-full h-full object-cover" />
+      </div>
+
+      <!-- Правая (серая) -->
+      <div
+        class="w-[120px] md:w-[250px] lg:w-[384px] h-[120px] md:h-[250px] lg:h-[384px] overflow-hidden rounded-xl grayscale opacity-60 hover:opacity-80 transition-all duration-300">
+        <img :src="images[(currentIndex + 1) % images.length]" alt="next" class="w-full h-full object-cover" />
       </div>
     </div>
 
