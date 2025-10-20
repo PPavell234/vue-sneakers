@@ -33,14 +33,12 @@ const nextImage = () => {
 
   <!-- Основной контент -->
   <div class="text-white bg-[#262423] h-120min-h-screen p-6 flex justify-center pl-25">
-    <div class="pr-14">
-      <ul class="flex flex-col items-start space-y-2">
-        <img src="/images/autor.png" alt="" />
-        <li>Автор</li>
-        <li>Per Landin</li>
-        <li>Опубликовано</li>
-        <li>16.10.2025</li>
-      </ul>
+    <div class="flex flex-col items-center text-center bg-[#33302F] p-6 rounded-2xl shadow-md w-[220px]">
+      <img src="/images/autor.png" alt="" class="" />
+      <p class="font-semibold">Автор</p>
+      <p>Per Landin</p>
+      <p class="mt-2 text-sm opacity-80">Опубликовано</p>
+      <p>16.10.2025</p>
     </div>
 
     <div class="pr-1 pl-12 space-y-4 max-w-[900px]">
