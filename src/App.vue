@@ -64,8 +64,10 @@ const nextImage = () => {
       <img src="/images/bt-l (2).png" alt="prev" class="w-16 h-auto hover:scale-110 transition-transform" />
     </button>
 
-    <!-- Основное изображение -->
-    <img :src="images[currentIndex]" alt="slider image" class="h-95 w-auto rounded-xl transition-all duration-500" />
+    <div class="w-[600px] h-[400px] overflow-hidden flex justify-center items-center rounded-xl bg-[#1f1f1f]">
+      <img :src="images[currentIndex]" alt="slider image"
+        class="w-full h-full object-cover transition-all duration-500" />
+    </div>
 
     <!-- Кнопка вправо -->
     <button @click="nextImage">
