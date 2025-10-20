@@ -32,7 +32,7 @@ const nextImage = () => {
   </div>
 
   <!-- Основной контент -->
-  <div class="text-white bg-[#262423] min-h-screen p-6 flex justify-center pl-25">
+  <div class="text-white bg-[#262423] h-120min-h-screen p-6 flex justify-center pl-25">
     <div class="pr-14">
       <ul class="flex flex-col items-start space-y-2">
         <img src="/images/autor.png" alt="" />
@@ -53,25 +53,63 @@ const nextImage = () => {
         challenging you at every given opportunity? Did I get your attention! Woohoo!
       </p>
 
+      <p>Introducing SoulSteel – an ever-expanding multiplayer dungeon crawler from Noxcrew where every corner holds a
+        new
+        adventure, available through the Minecraft Bedrock Edition server list – today! </p>
+
       <img src="/images/vi.png" alt="" class="w-full h-auto rounded-xl" />
+
+      <h1>EXPLORE A DEEP DUNGEON</h1>
+      <p>In SoulSteel, you assume the role of a daring, gear-craving relic hunter with the sole mission of exploring
+        treacherous dungeons
+        in the pursuit of glory and treasure. Your spoils give you resources and materials that allow you to evolve your
+        character, unlock
+        new abilities, grow in strength, and take on even tougher challenges. The more you extract, the better the
+        rewards! </p>
+      <p>Time is your greatest enemy. Or well, one of many enemies, actually! The undiscovered challenges held within
+        these dungeons
+        will test even the most seasoned adventurer with perplexing puzzles, treacherous traps, and mighty mobs hungry
+        for a fight – all
+        with the ability to end your journey suddenly and swiftly.   </p>
+
+      <p>But with risk comes the promise of rewards! Fortune favours the bold – those that venture the deepest will get
+        greater rewards,
+        and more plentiful resources. And better gear is an absolute necessity if you plan on conquering the progressive
+        challenges that
+        lie deep within these winding halls and corridors. </p>
     </div>
   </div>
 
-  <!-- 👇 Слайдер -->
-  <div class="flex justify-center items-center space-x-6 mt-10 mb-10">
+  <!-- 🔹 Слайдер -->
+  <div class="flex justify-center items-center mt-10 mb-10 space-x-4">
     <!-- Кнопка влево -->
-    <button @click="prevImage">
-      <img src="/images/bt-l (2).png" alt="prev" class="w-16 h-auto hover:scale-110 transition-transform" />
+    <button @click="prevImage" class="hover:scale-110 transition-transform">
+      <img src="/images/bt-l (2).png" alt="prev" class="w-12 h-auto" />
     </button>
 
-    <div class="w-[600px] h-[400px] overflow-hidden flex justify-center items-center rounded-xl bg-[#1f1f1f]">
-      <img :src="images[currentIndex]" alt="slider image"
-        class="w-full h-full object-cover transition-all duration-500" />
+    <!-- Блок с 3 изображениями -->
+    <div class="flex justify-center items-center space-x-4">
+      <!-- Левая картинка -->
+      <div class="w-[384px] h-[384px] overflow-hidden rounded-xl">
+        <img :src="images[(currentIndex + images.length - 1) % images.length]" alt="previous"
+          class="w-full h-full object-cover opacity-70" />
+      </div>
+
+      <!-- Центральная (активная) картинка -->
+      <div class="w-[384px] h-[384px] overflow-hidden rounded-xl shadow-lg">
+        <img :src="images[currentIndex]" alt="active" class="w-full h-full object-cover transition-all duration-500" />
+      </div>
+
+      <!-- Правая картинка -->
+      <div class="w-[384px] h-[384px] overflow-hidden rounded-xl">
+        <img :src="images[(currentIndex + 1) % images.length]" alt="next"
+          class="w-full h-full object-cover opacity-70" />
+      </div>
     </div>
 
     <!-- Кнопка вправо -->
-    <button @click="nextImage">
-      <img src="/images/bt-r (1).png" alt="next" class="w-16 h-auto hover:scale-110 transition-transform" />
+    <button @click="nextImage" class="hover:scale-110 transition-transform">
+      <img src="/images/bt-r (1).png" alt="next" class="w-12 h-auto" />
     </button>
   </div>
 </template>
