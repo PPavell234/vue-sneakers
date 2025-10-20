@@ -40,6 +40,51 @@ const togglePlay = () => {
     video.value.pause()
   }
 }
+
+//---------------Реация
+// каждая иконка имеет 2 состояния: обычное и активное
+const icons = [
+  {
+    default: '/icons/image_icon1(1).png',
+    active: '/icons/image_icon1.webp'
+  },
+  {
+    default: '/icons/image_icon2(2).png',
+    active: '/icons/image_icon2.webp'
+  },
+  {
+    default: '/icons/image_icon3(3).png',
+    active: '/icons/image_icon3.webp'
+  },
+  {
+    default: '/icons/image_icon4(4).png',
+    active: 'icons/image_icon4.webp'
+  }
+]
+
+// индекс выбранной иконки
+const activeIndex = ref(null)
+
+// счётчики (можно сделать все 0 → 1)
+const counts = ref(icons.map(() => 0))
+
+const selectIcon = (index) => {
+  // если нажали на ту же — снимаем выбор
+  if (activeIndex.value === index) {
+    activeIndex.value = null
+    counts.value[index] = 0
+    return
+  }
+
+  // сбрасываем остальные
+  counts.value = counts.value.map(() => 0)
+
+  // активируем новую
+  activeIndex.value = index
+  counts.value[index] = 1
+}
+
+
 </script>
 
 
@@ -99,22 +144,15 @@ const togglePlay = () => {
         <hr class="border-t-2 border-[#33302F] my-4 w-[100%] mx-auto" />
       </div>
 
+      <!-- Реация -->
       <ul class="flex justify-center items-end gap-6 md:gap-10 lg:gap-16 text-white">
-        <li class="flex flex-col items-center">
-          <img src="/icons/image_icon1(1).png" alt="" class="w-10 h-10" />
-          <span class="mt-2">0</span>
-        </li>
-        <li class="flex flex-col items-center">
-          <img src="/icons/image_icon2(2).png" alt="" class="w-10 h-10" />
-          <span class="mt-2">0</span>
-        </li>
-        <li class="flex flex-col items-center">
-          <img src="/icons/image_icon3(3).png" alt="" class="w-10 h-10" />
-          <span class="mt-2">0</span>
-        </li>
-        <li class="flex flex-col items-center">
-          <img src="/icons/image_icon4(4).png" alt="" class="w-10 h-10" />
-          <span class="mt-2">0</span>
+        <li v-for="(icon, index) in icons" :key="index"
+          class="flex flex-col items-center cursor-pointer transition-transform duration-300"
+          @click="selectIcon(index)">
+          <img :src="activeIndex === index ? icon.active : icon.default" alt=""
+            class="w-10 h-10 transition-all duration-200"
+            :class="activeIndex === index ? 'scale-110' : 'opacity-80 hover:opacity-100'" />
+          <span class="mt-2 text-lg">{{ counts[index] }}</span>
         </li>
       </ul>
 
