@@ -173,20 +173,22 @@ const nextImage = () => {
 
   </div>
 
-  <div class="bg-[#262423] py-1">
+  <div class="bg-[#262423]  py-1">
     <hr class="border-t-5 border-[#33302F] my-1 w-[1300px] mx-auto" />
   </div>
 
-  <div class="bg-[#262423]">
-    <ul class="flex justify-center items-center mt-0 mb-0 space-x-4 text-white h-[150px]">
+  <div class="bg-[#262432]">
+    <ul class="flex justify-center items-center space-x-4 text-white bg-[#33302F] pt-[10px] pb-[37px]">
       <li>Поделиться этой историей</li>
       <img src="/images/Item.png" alt="">
       <img src="/images/Item-1.png" alt="">
       <img src="/images/Item-2.png" alt="">
     </ul>
 
-    <div class="bg-[#33302F] text-white py-6">
-      <h1 class="flex justify-center text-lg mb-2">ПОДПИСАТЬСЯ НА MINECRAFT</h1>
+    <div class="bg-black text-white">
+      <h1 class="flex justify-center text-lg mb-2 pt-[10px] pb-[12px]">
+        ПОДПИСАТЬСЯ НА MINECRAFT
+      </h1>
 
       <ul class="flex justify-center items-center space-x-4">
         <li><img src="/images/Component 3.png" alt=""></li>
@@ -194,11 +196,42 @@ const nextImage = () => {
         <li><img src="/images/Component 3-2.png" alt=""></li>
         <li><img src="/images/Component 5.png" alt=""></li>
         <li><img src="/images/Component 8.png" alt=""></li>
+        <li><img src="/images/Component 6.png" alt=""></li>
+        <li><img src="/images/Component 4.png" alt=""></li>
+        <li><img src="/images/7.png" alt=""></li>
       </ul>
+
+      <div class="pb-[17px]"></div>
     </div>
 
+    <div class="text-white bg-[#33302F] px-[200px] ">
+      <!-- Блок с логотипами -->
+      <div class="flex justify-between items-center">
+        <div class="image-company flex items-center space-x-14">
+          <img src="/images/Container.png" alt="">
+          <img src="/images/Логотип Xbox Game Studios.png" alt="">
+        </div>
+
+        <div class="block2">
+          <img src="/images/EA.png" alt="">
+        </div>
+      </div>
+
+      <!-- Нижняя часть -->
+      <div class=" flex flex-col justify-center items-left text-sm">
+        <p>© 2025 Mojang AB. TM Microsoft Corporation.</p>
+        <ul class="flex space-x-2">
+          <li>Правила использования Minecraft</li>
+          <li>--</li>
+          <li>Правила использования Minecraft</li>
+        </ul>
+      </div>
+    </div>
 
   </div>
+  <footer>
+
+  </footer>
 
 
 
