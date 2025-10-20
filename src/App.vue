@@ -173,8 +173,23 @@ const nextImage = () => {
 
   </div>
 
-  <div class="bg-[#262423] py-10">
-    <hr class="border-t-4 border-[#33302F] my-6 w-[1300px] mx-auto" />
+  <div class="bg-[#262423] py-1">
+    <hr class="border-t-5 border-[#33302F] my-1 w-[1300px] mx-auto" />
+  </div>
+
+  <div class="bg-[#262423]">
+    <ul class="flex justify-center items-center mt-0 mb-0 space-x-4 text-white h-[120px]">
+      <li>Поделиться этой историей</li>
+      <img src="/images/Item.png" alt="">
+      <img src="/images/Item-1.png" alt="">
+      <img src="/images/Item-2.png" alt="">
+    </ul>
+
+    <!-- нижняя часть -->
+    <div class="bg-[#33302F] h-[60px]"></div>
+  </div>
+
+  <div class="bg-[#262423] py-1">
   </div>
 
 
