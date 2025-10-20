@@ -99,6 +99,24 @@ const togglePlay = () => {
         <hr class="border-t-2 border-[#33302F] my-4 w-[100%] mx-auto" />
       </div>
 
+      <div class="flex justify-center items-center gap-4 md:gap-8 lg:gap-27">
+        <ul>
+          <img src="/icons/image_icon1(1).png" alt="" />
+          <li>0</li>
+        </ul>
+        <ul>
+          <img src="/icons/image_icon2(2).png" alt="" />
+          <li>0</li>
+        </ul>
+        <ul>
+          <img src="/icons/image_icon3(3).png" alt="" />
+          <li>0</li>
+
+        </ul>
+        <img src="/icons/image_icon4(4).png" alt="" />
+        <li>0</li>
+      </div>
+
 
       <div class="bg-[#262423] py-1">
         <hr class="border-t-2 border-[#33302F] my-1 w-[90%] mx-auto" />
