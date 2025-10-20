@@ -18,32 +18,28 @@ const nextImage = () => {
 }
 
 //-----------------------Видео плеер
+// refs для видео и кнопки
 const video = ref(null)
-const playButton = ref(null)
+const showButton = ref(false) // управление видимостью кнопки
+const isPlaying = ref(false)  // отслеживаем состояние (play/pause)
 
 onMounted(() => {
-  // защита — если элемент не найден
-  if (!video.value || !playButton.value) return
+  const vid = video.value
 
-  playButton.value.addEventListener('click', () => {
-    video.value.play()
-  })
-
-  video.value.addEventListener('play', () => {
-    playButton.value.style.opacity = '0'
-    playButton.value.style.pointerEvents = 'none'
-  })
-
-  video.value.addEventListener('pause', () => {
-    playButton.value.style.opacity = '1'
-    playButton.value.style.pointerEvents = 'auto'
-  })
-
-  video.value.addEventListener('ended', () => {
-    playButton.value.style.opacity = '1'
-    playButton.value.style.pointerEvents = 'auto'
-  })
+  vid.addEventListener('play', () => (isPlaying.value = true))
+  vid.addEventListener('pause', () => (isPlaying.value = false))
 })
+
+// клик по кнопке
+const togglePlay = () => {
+  if (!video.value) return
+
+  if (video.value.paused) {
+    video.value.play()
+  } else {
+    video.value.pause()
+  }
+}
 </script>
 
 
@@ -88,11 +84,14 @@ onMounted(() => {
         Introducing SoulSteel – an ever-expanding multiplayer dungeon crawler from Noxcrew where every corner holds a
         new adventure, available through the Minecraft Bedrock Edition server list – today!
       </p>
-      <div class="relative inline-block">
+      <div class="relative inline-block group" @mouseenter="showButton = true" @mouseleave="showButton = false">
+        <!-- видео -->
         <video ref="video" src="/video/videoplayback.mp4" class="w-full h-auto rounded-xl" playsinline></video>
 
-        <img ref="playButton" src="/images/Group 1.png" alt="button"
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-opacity duration-300 z-10" />
+        <!-- кнопка поверх видео -->
+        <img v-show="showButton" :src="isPlaying ? '/images/Pause.png' : '/images/Group 1.png'" alt="Play/Pause"
+          @click="togglePlay"
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-opacity duration-300 opacity-80 hover:opacity-100 z-10" />
       </div>
 
 
