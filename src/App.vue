@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import Header from './components/Header.vue'
 
+
+//-----------------------Слайдер
+
 // массив картинок
 const images = [
   '/images/images1.png',
@@ -21,6 +24,33 @@ const prevImage = () => {
 // функция переключения вправо
 const nextImage = () => {
   currentIndex.value = (currentIndex.value + 1) % images.length
+
+  //-----------------------Видео плеер
+  const video = document.getElementById('myVideo');
+  const playButton = document.getElementById('playButton');
+
+  // Нажатие на кнопку — запуск видео
+  playButton.addEventListener('click', () => {
+    video.play();
+  });
+
+  // Когда видео проигрывается — скрываем кнопку
+  video.addEventListener('play', () => {
+    playButton.style.opacity = '0';
+    playButton.style.pointerEvents = 'none'; // чтобы не мешала клику
+  });
+
+  // Когда видео на паузе — показываем кнопку
+  video.addEventListener('pause', () => {
+    playButton.style.opacity = '1';
+    playButton.style.pointerEvents = 'auto';
+  });
+
+  // При окончании видео — показываем кнопку снова
+  video.addEventListener('ended', () => {
+    playButton.style.opacity = '1';
+    playButton.style.pointerEvents = 'auto';
+  });
 }
 </script>
 
@@ -64,8 +94,30 @@ const nextImage = () => {
         Introducing SoulSteel – an ever-expanding multiplayer dungeon crawler from Noxcrew where every corner holds a
         new adventure, available through the Minecraft Bedrock Edition server list – today!
       </p>
+      <div class="vidio relative inline-block">
+        <video id="myVideo" src="/video/videoplayback.mp4" class="w-full h-auto rounded-xl"></video>
 
-      <img src="/images/vi.png" alt="" class="w-full h-auto rounded-xl" />
+        <img id="playButton" src="/images/Group 1.png" alt="button"
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-opacity duration-300" />
+      </div>
+
+      <p>EXPLORE A DEEP DUNGEON</p>
+      <p>In SoulSteel, you assume the role of a daring, gear-craving relic hunter with the sole mission of exploring
+        treacherous dungeons
+        in the pursuit of glory and treasure. Your spoils give you resources and materials that allow you to evolve your
+        character, unlock
+        new abilities, grow in strength, and take on even tougher challenges. The more you extract, the better the
+        rewards! </p>
+      <p>Time is your greatest enemy. Or well, one of many enemies, actually! The undiscovered challenges held within
+        these dungeons
+        will test even the most seasoned adventurer with perplexing puzzles, treacherous traps, and mighty mobs hungry
+        for a fight – all
+        with the ability to end your journey suddenly and swiftly.  </p>
+      <p>But with risk comes the promise of rewards! Fortune favours the bold – those that venture the deepest will get
+        greater rewards,
+        and more plentiful resources. And better gear is an absolute necessity if you plan on conquering the progressive
+        challenges that
+        lie deep within these winding halls and corridors. </p>
     </div>
   </div>
 
