@@ -93,6 +93,7 @@ const selectIcon = (index) => {
   <!-- Шапка -->
   <header class="bg-[#262423] w-full h-10 flex items-center px-4 md:px-10">
     <img src="/images/logo.png" alt="logo" class="h-6 md:h-8" />
+
   </header>
 
   <!-- Заголовок -->
@@ -110,6 +111,9 @@ const selectIcon = (index) => {
       <p>Per Landin</p>
       <p class="mt-2 text-sm opacity-80">Опубликовано</p>
       <p>16.10.2025</p>
+
+      <img src="/video/ednder2New.gif" alt="animation" class="w-[800px] h-[450px] rounded-xl object-cover" />
+
     </div>
 
     <!-- Правая колонка -->
