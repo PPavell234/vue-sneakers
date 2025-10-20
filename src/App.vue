@@ -41,48 +41,44 @@ const togglePlay = () => {
   }
 }
 
-//---------------Реация
-// каждая иконка имеет 2 состояния: обычное и активное
+//---------------Реакция
 const icons = [
-  {
-    default: '/icons/image_icon1(1).png',
-    active: '/icons/image_icon1.webp'
-  },
-  {
-    default: '/icons/image_icon2(2).png',
-    active: '/icons/image_icon2.webp'
-  },
-  {
-    default: '/icons/image_icon3(3).png',
-    active: '/icons/image_icon3.webp'
-  },
-  {
-    default: '/icons/image_icon4(4).png',
-    active: 'icons/image_icon4.webp'
-  }
+  { default: '/icons/image_icon1(1).png', active: '/icons/image_icon1.webp' },
+  { default: '/icons/image_icon2(2).png', active: '/icons/image_icon2.webp' },
+  { default: '/icons/image_icon3(3).png', active: '/icons/image_icon3.webp' },
+  { default: '/icons/image_icon4(4).png', active: '/icons/image_icon4.webp' }
 ]
 
-// индекс выбранной иконки
 const activeIndex = ref(null)
-
-// счётчики (можно сделать все 0 → 1)
 const counts = ref(icons.map(() => 0))
+const showGif = ref(false)
 
+// ✅ Рабочая функция selectIcon
 const selectIcon = (index) => {
-  // если нажали на ту же — снимаем выбор
+  // если нажали на ту же — сброс
   if (activeIndex.value === index) {
     activeIndex.value = null
     counts.value[index] = 0
+    showGif.value = false
     return
   }
 
-  // сбрасываем остальные
+  // сбрасываем все реакции
   counts.value = counts.value.map(() => 0)
 
-  // активируем новую
+  // активируем выбранную
   activeIndex.value = index
   counts.value[index] = 1
+
+  // показываем гифку
+  showGif.value = true
+
+  // автоматически скрываем через 5 секунд
+  setTimeout(() => {
+    showGif.value = false
+  }, 5000)
 }
+
 
 
 </script>
@@ -111,9 +107,6 @@ const selectIcon = (index) => {
       <p>Per Landin</p>
       <p class="mt-2 text-sm opacity-80">Опубликовано</p>
       <p>16.10.2025</p>
-
-      <img src="/video/ednder2New.gif" alt="animation" class="w-[800px] h-[450px] rounded-xl object-cover" />
-
     </div>
 
     <!-- Правая колонка -->
@@ -159,6 +152,11 @@ const selectIcon = (index) => {
           <span class="mt-2 text-lg">{{ counts[index] }}</span>
         </li>
       </ul>
+
+      <!-- 🔹 Показ гифки при выборе реакции -->
+      <div v-if="showGif" class="fixed inset-0 bg-black/80 flex justify-center items-center z-50">
+        <img src="/video/ednder2New.gif" alt="Reaction" class="w-[800px] h-[450px] object-contain rounded-xl" />
+      </div>
 
       <div class="bg-[#262423] py-1">
         <hr class="border-t-2 border-[#33302F] my-1 w-[90%] mx-auto" />
