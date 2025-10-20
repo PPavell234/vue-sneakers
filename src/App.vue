@@ -112,4 +112,74 @@ const nextImage = () => {
       <img src="/images/bt-r (1).png" alt="next" class="w-12 h-auto" />
     </button>
   </div>
+
+
+  <!-- Основной контент2 -->
+
+  <div class="text-white bg-[#262423] h-120min-h-screen p-6 flex justify-center pl-25">
+
+    <div class="p-6 pl-35"></div>
+
+
+    <div class="pr-1 pl-12 space-y-4 max-w-[900px]">
+      <h1 class="text-2xl">TIME IS OF THE ESSENCE </h1>
+      <p>However, linger too long and you’ll have to deal with the consequences. If you don’t make it back in time, you
+        will be trapped
+        inside, losing a percentage of your hard-earned rewards in the process, all for naught! I know what you’re
+        thinking: “How could
+        Noxcrew design such a heinous-yet-challenging game mechanic?". Hey, don’t ask me, I’m just the messenger! </p>
+      <p>Your dungeon starts with very little time available, meaning that short, cautious trips are a preferable
+        approach. Luckily, there’s
+        ‘Chrono Essence’ – a mysterious substance used to level up your Chrono Keeper lantern; an item that allows you
+        to get more
+        time in the dungeon when you level it up. </p>
+      <p>Not all your time is spent spelunking those structures. Port Fortuna, a hub for both you and other fellow
+        dungeoneers, is your
+        go-to location for levelling up and evolving your weapons and abilities and interacting with vendors. And at the
+        campsite, you’ll
+        be able to add your own personal flair through customization based on level, progression, and past dungeon
+        discoveries.
+        Marshmallows may not be included, but we do recommend gathering your friends around the fire to trade stories of
+        your
+        exploits! </p>
+
+      <img src="/images/images4.png" alt="" class="w-full h-auto rounded-xl" />
+
+      <div class="flex justify-center items-center mb-15 gap-4">
+        <p>IT'S A TRAP! Or well, it's a rock! Speed Forest Speed</p>
+        <img src="/images/animation.gif" alt="loading animation" class="w-[30px] h-auto" />
+      </div>
+
+
+      <p>WHAT’S NEXT?</p>
+      <p>SoulSteel is meant to be an evolving experience that will only grow over time. This means that more updates are
+        on the horizon.
+        New seasons will bring new regions, dungeons, weapons, armor sets, characters, enemies, and cosmetics. In short,
+        Noxcrew has
+        a lot in store!  </p>
+      <p>“With SoulSteel, we've found gameplay that we find fun, and we can't stop playing! We have so many cool plans
+        and ideas for
+        where we want to take the journey, and we can't wait to share them with you!” says Noxcrew’s Joe Arsenault. </p>
+      <p>
+        So who's ready for some dungeons? Personally, I'm souled! You can find SoulSteel in the Servers tab on Minecraft
+        Bedrock
+        Edition today! And while you’re at it, make sure to connect with other fellow dungeoneers over at the SoulSteel
+        Discord channel.
+      </p>
+      <p>See you inside! </p>
+
+
+    </div>
+
+  </div>
+
+  <div class="bg-[#262423] py-10">
+    <hr class="border-t-4 border-[#33302F] my-6 w-[1300px] mx-auto" />
+  </div>
+
+
+
+
+
+
 </template>
