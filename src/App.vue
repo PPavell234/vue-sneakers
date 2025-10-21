@@ -54,56 +54,43 @@ const icons = [
 const activeIndex = ref(null)
 const counts = ref(icons.map(() => 0))
 
+// базовые имена файлов
+const gifFiles = [
+  '/video/ednder2New1.gif',
+  '/video/ednder2New2.gif',
+  '/video/ednder2New3.gif'
+]
+
+const gifIndex = ref(0)
+const gifSrc = ref('')
 const showGif = ref(false)
-const gifKey = ref(0)
 let gifTimer = null
 
-// DEBUG helper (оставьте или уберите)
-const dbg = (...args) => console.log('[GIF]', ...args)
-
-/**
- * selectIcon — надёжно перезапускает GIF при каждом включении.
- * Убирает transition-эффекты как причину проблем (см. шаблон ниже).
- */
-const selectIcon = async (index) => {
-  dbg('click', index, 'activeBefore', activeIndex.value, 'showGifBefore', showGif.value, 'gifKeyBefore', gifKey.value)
-
-  // если кликнули по той же — снимаем реакцию и скрываем GIF
-  if (activeIndex.value === index) {
-    activeIndex.value = null
-    counts.value[index] = 0
-
-    // скрываем GIF и очищаем таймер
-    if (gifTimer) { clearTimeout(gifTimer); gifTimer = null }
-    showGif.value = false
-    dbg('deactivate', index)
-    return
-  }
-
-  // активируем выбранную иконку (сбросим все счётчики)
-  counts.value = counts.value.map(() => 0)
-  activeIndex.value = index
-  counts.value[index] = 1
-
-  // Очищаем предыдущий таймер (если был)
-  if (gifTimer) { clearTimeout(gifTimer); gifTimer = null }
-
-  // Перезапускаем GIF: сначала скрываем (гарантированное удаление из DOM),
-  // ждём 2 nextTick чтобы быть уверенными, что элемент убран и ре-рендер произойдёт,
-  // увеличиваем ключ и показываем заново.
+const closeGif = () => {
   showGif.value = false
-  await nextTick()
-  await nextTick()      // в некоторых случаях нужен второй тик (убирает проблемы с переходами)
-  gifKey.value += 1
+  if (gifTimer) {
+    clearTimeout(gifTimer)
+    gifTimer = null
+  }
+}
+
+const selectIcon = () => {
+  // закрываем старую гифку, если есть
+  closeGif()
+
+  // переходим к следующей гифке
+  gifIndex.value = (gifIndex.value + 1) % gifFiles.length
+
+  // 👇 создаём уникальный URL (добавляем ?t=timestamp)
+  const basePath = gifFiles[gifIndex.value]
+  gifSrc.value = `${basePath}?t=${Date.now()}`
+
+  // показываем
   showGif.value = true
 
-  dbg('show', { index, gifKey: gifKey.value })
-
-  // Автоматическое скрытие через 5 сек (перезапишется при новом клике)
+  // автозакрытие через 5 секунд
   gifTimer = setTimeout(() => {
-    showGif.value = false
-    gifTimer = null
-    dbg('auto-hide', index)
+    closeGif()
   }, 5000)
 }
 
@@ -118,10 +105,17 @@ const selectIcon = async (index) => {
 
 
 
-  <div v-if="showGif" class="fixed inset-0 bg-black/90 flex justify-center items-center z-[2000] p-4"
-    @click.self="showGif = false">
-    <img :key="gifKey" src="/video/ednder2New.gif" alt="Reaction"
-      class="max-w-full max-h-full object-contain rounded-lg shadow-lg" draggable="false" />
+  <div class="flex flex-col items-center gap-4 p-6">
+    <button @click="selectIcon" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-white">
+      ▶ Показать гифку
+    </button>
+
+    <transition name="fade">
+      <div v-if="showGif" class="fixed inset-0 bg-black/80 flex justify-center items-center z-[2000]"
+        @click.self="closeGif">
+        <img :src="gifSrc" alt="Reaction" class="max-w-full max-h-full object-contain rounded-xl shadow-lg" />
+      </div>
+    </transition>
   </div>
 
 
@@ -193,10 +187,7 @@ const selectIcon = async (index) => {
         </li>
       </ul>
 
-      <!-- 🔹 Показ гифки при выборе реакции -->
-      <div v-if="showGif" class="fixed inset-0 bg-black/80 flex justify-center items-center z-50">
-        <img src="/video/ednder2New.gif" alt="Reaction" class="w-[800px] h-[450px] object-contain rounded-xl" />
-      </div>
+
 
       <div class="bg-[#262423] py-1">
         <hr class="border-t-2 border-[#33302F] my-1 w-[90%] mx-auto" />
