@@ -42,8 +42,7 @@ const togglePlay = () => {
 }
 
 
-//---------------Реакция
-// (оставьте остальную часть скрипта без изменений — только часть реакций/GIF замените)
+// ---------------------- Реакции ----------------------
 const icons = [
   { default: '/icons/image_icon1(1).png', active: '/icons/image_icon1.webp' },
   { default: '/icons/image_icon2(2).png', active: '/icons/image_icon2.webp' },
@@ -51,21 +50,22 @@ const icons = [
   { default: '/icons/image_icon4(4).png', active: '/icons/image_icon4.webp' }
 ]
 
+// состояния
 const activeIndex = ref(null)
 const counts = ref(icons.map(() => 0))
+const showGif = ref(false)
+const gifSrc = ref('')
+const gifIndex = ref(0)
+let gifTimer = null
 
-// базовые имена файлов
+// массив гифок (можно хоть 2, хоть 5)
 const gifFiles = [
   '/video/ednder2New1.gif',
   '/video/ednder2New2.gif',
   '/video/ednder2New3.gif'
 ]
 
-const gifIndex = ref(0)
-const gifSrc = ref('')
-const showGif = ref(false)
-let gifTimer = null
-
+// функция закрытия гифки
 const closeGif = () => {
   showGif.value = false
   if (gifTimer) {
@@ -74,18 +74,25 @@ const closeGif = () => {
   }
 }
 
-const selectIcon = () => {
-  // закрываем старую гифку, если есть
-  closeGif()
+// функция выбора реакции
+const selectIcon = (index) => {
+  // если нажали на ту же — сбросить
+  if (activeIndex.value === index) {
+    counts.value[index] = 0
+    activeIndex.value = null
+    closeGif()
+    return
+  }
 
-  // переходим к следующей гифке
+  // сбрасываем все остальные реакции
+  counts.value = counts.value.map(() => 0)
+  activeIndex.value = index
+  counts.value[index] = 1
+
+  // показываем гифку
+  closeGif() // на случай предыдущей
   gifIndex.value = (gifIndex.value + 1) % gifFiles.length
-
-  // 👇 создаём уникальный URL (добавляем ?t=timestamp)
-  const basePath = gifFiles[gifIndex.value]
-  gifSrc.value = `${basePath}?t=${Date.now()}`
-
-  // показываем
+  gifSrc.value = `${gifFiles[gifIndex.value]}?t=${Date.now()}` // 👈 уникальный URL
   showGif.value = true
 
   // автозакрытие через 5 секунд
@@ -102,21 +109,6 @@ const selectIcon = () => {
 
 
 <template>
-
-
-
-  <div class="flex flex-col items-center gap-4 p-6">
-    <button @click="selectIcon" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-white">
-      ▶ Показать гифку
-    </button>
-
-    <transition name="fade">
-      <div v-if="showGif" class="fixed inset-0 bg-black/80 flex justify-center items-center z-[2000]"
-        @click.self="closeGif">
-        <img :src="gifSrc" alt="Reaction" class="max-w-full max-h-full object-contain rounded-xl shadow-lg" />
-      </div>
-    </transition>
-  </div>
 
 
 
@@ -175,7 +167,7 @@ const selectIcon = () => {
         <hr class="border-t-2 border-[#33302F] my-4 w-[100%] mx-auto" />
       </div>
 
-      <!-- Реация -->
+      <!-- 🔹 Реакции -->
       <ul class="flex justify-center items-end gap-6 md:gap-10 lg:gap-16 text-white">
         <li v-for="(icon, index) in icons" :key="index"
           class="flex flex-col items-center cursor-pointer transition-transform duration-300"
@@ -187,6 +179,13 @@ const selectIcon = () => {
         </li>
       </ul>
 
+      <!-- 🔹 Гифка поверх всего -->
+      <transition name="fade">
+        <div v-if="showGif" class="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
+          @click.self="closeGif">
+          <img :src="gifSrc" alt="Reaction" class="max-w-full max-h-full object-contain md:object-cover rounded-xl" />
+        </div>
+      </transition>
 
 
       <div class="bg-[#262423] py-1">
