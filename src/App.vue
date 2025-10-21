@@ -190,7 +190,7 @@ const selectIcon = async (index) => {
         <hr class="border-t-2 border-[#33302F] my-4 w-[100%] mx-auto" />
       </div>
 
-      <!-- 🔹 Реакции -->
+      <!--Реакции -->
       <ul class="flex justify-center items-end gap-6 md:gap-10 lg:gap-16 text-white">
         <li v-for="(icon, index) in icons" :key="index"
           class="flex flex-col items-center cursor-pointer transition-transform duration-300"
@@ -202,7 +202,7 @@ const selectIcon = async (index) => {
         </li>
       </ul>
 
-      <!-- 🎬 Гифка на весь экран -->
+      <!--Гифка-->
       <transition name="fade">
         <div v-if="showGif" class="fixed inset-0 bg-black/95 flex justify-center items-center z-[9999]"
           @click.self="closeGif">
@@ -272,7 +272,7 @@ const selectIcon = async (index) => {
     </button>
   </div>
 
-  <!-- 🔹 Второй контент -->
+  <!--Второй контент -->
   <div class="text-white bg-[#262423] min-h-screen p-4 md:p-10 flex justify-center">
     <div class="max-w-[900px] space-y-4">
       <h1 class="text-xl md:text-2xl font-semibold">TIME IS OF THE ESSENCE</h1>
