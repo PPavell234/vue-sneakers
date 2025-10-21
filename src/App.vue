@@ -55,17 +55,16 @@ const activeIndex = ref(null)
 const counts = ref(icons.map(() => 0))
 const showGif = ref(false)
 const gifSrc = ref('')
-const gifIndex = ref(0)
 let gifTimer = null
 
-// массив гифок (можно хоть 2, хоть 5)
+// список гифок (можно разные для разнообразия)
 const gifFiles = [
   '/video/ednder2New1.gif',
   '/video/ednder2New2.gif',
   '/video/ednder2New3.gif'
 ]
 
-// функция закрытия гифки
+// закрыть гифку
 const closeGif = () => {
   showGif.value = false
   if (gifTimer) {
@@ -74,28 +73,31 @@ const closeGif = () => {
   }
 }
 
-// функция выбора реакции
-const selectIcon = (index) => {
-  // если нажали на ту же — сбросить
+// выбрать реакцию
+const selectIcon = async (index) => {
+  // если повторно нажали на ту же — сбросить
   if (activeIndex.value === index) {
-    counts.value[index] = 0
     activeIndex.value = null
+    counts.value[index] = 0
     closeGif()
     return
   }
 
-  // сбрасываем все остальные реакции
+  // сбросить другие реакции
   counts.value = counts.value.map(() => 0)
   activeIndex.value = index
   counts.value[index] = 1
 
-  // показываем гифку
-  closeGif() // на случай предыдущей
-  gifIndex.value = (gifIndex.value + 1) % gifFiles.length
-  gifSrc.value = `${gifFiles[gifIndex.value]}?t=${Date.now()}` // 👈 уникальный URL
+  // показать гифку (перезапуск)
+  closeGif()
+  await nextTick()
+
+  // выбираем случайную гифку и добавляем "?t=" чтобы перезапустить кэш
+  const randomGif = gifFiles[Math.floor(Math.random() * gifFiles.length)]
+  gifSrc.value = `${randomGif}?t=${Date.now()}`
   showGif.value = true
 
-  // автозакрытие через 5 секунд
+  // авто-закрытие через 5 секунд
   gifTimer = setTimeout(() => {
     closeGif()
   }, 5000)
@@ -107,14 +109,23 @@ const selectIcon = (index) => {
 </script>
 
 <style scoped>
+/* Плавное появление/исчезновение */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.4s ease;
+  transition: opacity 0.6s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* Адаптивность гифки */
+@media (max-width: 768px) {
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 </style>
 
@@ -186,16 +197,16 @@ const selectIcon = (index) => {
           @click="selectIcon(index)">
           <img :src="activeIndex === index ? icon.active : icon.default" alt=""
             class="w-10 h-10 transition-all duration-200"
-            :class="activeIndex === index ? 'scale-110' : 'opacity-80 hover:opacity-100'" />
+            :class="activeIndex === index ? 'scale-125' : 'opacity-80 hover:opacity-100'" />
           <span class="mt-2 text-lg">{{ counts[index] }}</span>
         </li>
       </ul>
 
-      <!-- 🔹 Гифка поверх всего -->
+      <!-- 🎬 Гифка на весь экран -->
       <transition name="fade">
-        <div v-if="showGif" class="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
+        <div v-if="showGif" class="fixed inset-0 bg-black/95 flex justify-center items-center z-[9999]"
           @click.self="closeGif">
-          <img :src="gifSrc" alt="Reaction" class="max-w-full max-h-full object-contain md:object-cover rounded-xl" />
+          <img :src="gifSrc" alt="Reaction" class="absolute inset-0 w-full h-full object-cover" />
         </div>
       </transition>
 
