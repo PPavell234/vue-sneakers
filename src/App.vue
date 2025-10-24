@@ -1,111 +1,9 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import Header from './components/Header.vue'
-
-//-----------------------Слайдер
-const images = [
-  '/images/images1.png',
-  '/images/images2.png',
-  '/images/images3.png'
-]
-const currentIndex = ref(0)
-
-const prevImage = () => {
-  currentIndex.value = (currentIndex.value - 1 + images.length) % images.length
-}
-const nextImage = () => {
-  currentIndex.value = (currentIndex.value + 1) % images.length
-}
-
-//-----------------------Видео плеер
-// refs для видео и кнопки
-const video = ref(null)
-const showButton = ref(false) // управление видимостью кнопки
-const isPlaying = ref(false)  // отслеживаем состояние (play/pause)
-
-onMounted(() => {
-  const vid = video.value
-
-  vid.addEventListener('play', () => (isPlaying.value = true))
-  vid.addEventListener('pause', () => (isPlaying.value = false))
-})
-
-// клик по кнопке
-const togglePlay = () => {
-  if (!video.value) return
-
-  if (video.value.paused) {
-    video.value.play()
-  } else {
-    video.value.pause()
-  }
-}
-
-
-// ---------------------- Реакции ----------------------
-const icons = [
-  { default: '/icons/image_icon1(1).png', active: '/icons/image_icon1.webp' },
-  { default: '/icons/image_icon2(2).png', active: '/icons/image_icon2.webp' },
-  { default: '/icons/image_icon3(3).png', active: '/icons/image_icon3.webp' },
-  { default: '/icons/image_icon4(4).png', active: '/icons/image_icon4.webp' }
-]
-
-// состояния
-const activeIndex = ref(null)
-const counts = ref(icons.map(() => 0))
-const showGif = ref(false)
-const gifSrc = ref('')
-let gifTimer = null
-
-// список гифок (можно разные для разнообразия)
-const gifFiles = [
-  '/video/ednder2New1.gif',
-  '/video/ednder2New2.gif',
-  '/video/ednder2New3.gif'
-]
-
-// закрыть гифку
-const closeGif = () => {
-  showGif.value = false
-  if (gifTimer) {
-    clearTimeout(gifTimer)
-    gifTimer = null
-  }
-}
-
-// выбрать реакцию
-const selectIcon = async (index) => {
-  // если повторно нажали на ту же — сбросить
-  if (activeIndex.value === index) {
-    activeIndex.value = null
-    counts.value[index] = 0
-    closeGif()
-    return
-  }
-
-  // сбросить другие реакции
-  counts.value = counts.value.map(() => 0)
-  activeIndex.value = index
-  counts.value[index] = 1
-
-  // показать гифку (перезапуск)
-  closeGif()
-  await nextTick()
-
-  // выбираем случайную гифку и добавляем "?t=" чтобы перезапустить кэш
-  const randomGif = gifFiles[Math.floor(Math.random() * gifFiles.length)]
-  gifSrc.value = `${randomGif}?t=${Date.now()}`
-  showGif.value = true
-
-  // авто-закрытие через 5 секунд
-  gifTimer = setTimeout(() => {
-    closeGif()
-  }, 5000)
-}
-
-
-
-
+import VideoPlayer from './components/VideoPlayer.vue'
+import Reactions from './components/Reactions.vue'
+import Slider from './components/Slider.vue'
 </script>
 
 <style scoped>
@@ -129,29 +27,23 @@ const selectIcon = async (index) => {
 }
 </style>
 
-
-
 <template>
-
-
-
   <!-- Шапка -->
-  <header class="bg-[#262423] w-full h-10 flex items-center px-4 md:px-10">
+  <header class="bg-[#262423] w-full h-10 flex items-center px-5 md:px-10">
     <img src="/images/logo.png" alt="logo" class="h-6 md:h-8" />
-
   </header>
 
   <!-- Заголовок -->
-  <div class="flex justify-center items-center my-6 px-4">
-    <img src="/images/Title1.png" alt="Title" class="max-w-full h-auto md:w-[600px] lg:w-[800px]" />
+  <div class="flex justify-center items-center my-2 px-10">
+    <img src="/images/Title1.png" alt="Title" class="w-[300px] md:w-[600px] lg:w-[1500px] h-auto" />
   </div>
 
   <!-- Основной контент -->
   <div
     class="text-white bg-[#262423] min-h-screen p-4 md:p-10 flex flex-col lg:flex-row justify-center items-start gap-8">
     <!-- Левая колонка -->
-    <div class="flex flex-col items-center text-center bg-[#33302F] p-6 rounded-2xl shadow-md w-full md:w-[250px]">
-      <img src="/images/autor.png" alt="" class="" />
+    <div class="flex flex-col items-center text-center bg-[#33302F] p-6 rounded-2xl shadow-md w-full  md:w-[250px]">
+      <img src="/images/autor.png" alt="Автор" class="max-w-[50px] w-full h-auto rounded-xl" />
       <p class="font-semibold mt-2">Автор</p>
       <p>Per Landin</p>
       <p class="mt-2 text-sm opacity-80">Опубликовано</p>
@@ -160,9 +52,7 @@ const selectIcon = async (index) => {
 
     <!-- Правая колонка -->
     <div class="space-y-4 max-w-[900px]">
-      <h1 class="text-xl md:text-2xl font-semibold">
-        SoulSteel – a new dungeoneering adventure
-      </h1>
+      <h1 class="text-xl md:text-2xl font-semibold">SoulSteel – a new dungeoneering adventure</h1>
       <p>Evolve your arsenal and conquer the dungeon!</p>
 
       <p class="mt-10">
@@ -175,104 +65,47 @@ const selectIcon = async (index) => {
         Introducing SoulSteel – an ever-expanding multiplayer dungeon crawler from Noxcrew where every corner holds a
         new adventure, available through the Minecraft Bedrock Edition server list – today!
       </p>
-      <div class="relative inline-block group" @mouseenter="showButton = true" @mouseleave="showButton = false">
-        <!-- видео -->
-        <video ref="video" src="/video/videoplayback.mp4 " class="w-[800px] h-[450px] rounded-xl object-cover"
-          playsinline></video>
 
-        <!-- кнопка поверх видео -->
-        <img v-show="showButton" :src="isPlaying ? '/images/Pause.png' : '/images/Group 1.png'" alt="Play/Pause"
-          @click="togglePlay"
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-opacity duration-300 opacity-80 hover:opacity-100 z-10" />
-      </div>
+      <!-- Видео -->
+      <VideoPlayer />
 
       <div class="bg-[#262423] py-1">
         <hr class="border-t-2 border-[#33302F] my-4 w-[100%] mx-auto" />
       </div>
 
-      <!--Реакции -->
-      <ul class="flex justify-center items-end gap-6 md:gap-10 lg:gap-16 text-white">
-        <li v-for="(icon, index) in icons" :key="index"
-          class="flex flex-col items-center cursor-pointer transition-transform duration-300"
-          @click="selectIcon(index)">
-          <img :src="activeIndex === index ? icon.active : icon.default" alt=""
-            class="w-10 h-10 transition-all duration-200"
-            :class="activeIndex === index ? 'scale-125' : 'opacity-80 hover:opacity-100'" />
-          <span class="mt-2 text-lg">{{ counts[index] }}</span>
-        </li>
-      </ul>
-
-      <!--Гифка-->
-      <transition name="fade">
-        <div v-if="showGif" class="fixed inset-0 bg-black/95 flex justify-center items-center z-[9999]"
-          @click.self="closeGif">
-          <img :src="gifSrc" alt="Reaction" class="absolute inset-0 w-full h-full object-cover" />
-        </div>
-      </transition>
-
+      <!-- Реакции -->
+      <Reactions />
 
       <div class="bg-[#262423] py-1">
         <hr class="border-t-2 border-[#33302F] my-1 w-[90%] mx-auto" />
       </div>
 
-
-
       <p>EXPLORE A DEEP DUNGEON</p>
-      <p>In SoulSteel, you assume the role of a daring, gear-craving relic hunter with the sole mission of exploring
-        treacherous dungeons
-        in the pursuit of glory and treasure. Your spoils give you resources and materials that allow you to evolve your
-        character, unlock
-        new abilities, grow in strength, and take on even tougher challenges. The more you extract, the better the
-        rewards! </p>
-      <p>Time is your greatest enemy. Or well, one of many enemies, actually! The undiscovered challenges held within
-        these dungeons
-        will test even the most seasoned adventurer with perplexing puzzles, treacherous traps, and mighty mobs hungry
-        for a fight – all
-        with the ability to end your journey suddenly and swiftly.  </p>
-      <p>But with risk comes the promise of rewards! Fortune favours the bold – those that venture the deepest will get
-        greater rewards,
-        and more plentiful resources. And better gear is an absolute necessity if you plan on conquering the progressive
-        challenges that
-        lie deep within these winding halls and corridors. </p>
+      <p>
+        In SoulSteel, you assume the role of a daring, gear-craving relic hunter with the sole mission of exploring
+        treacherous dungeons in the pursuit of glory and treasure. Your spoils give you resources and materials that
+        allow you to evolve your character, unlock new abilities, grow in strength, and take on even tougher challenges.
+        The more you extract, the better the rewards!
+      </p>
+
+      <p>
+        Time is your greatest enemy. Or well, one of many enemies, actually! The undiscovered challenges held within
+        these dungeons will test even the most seasoned adventurer with perplexing puzzles, treacherous traps, and
+        mighty mobs hungry for a fight – all with the ability to end your journey suddenly and swiftly.
+      </p>
+
+      <p>
+        But with risk comes the promise of rewards! Fortune favours the bold – those that venture the deepest will get
+        greater rewards, and more plentiful resources. And better gear is an absolute necessity if you plan on
+        conquering the progressive challenges that lie deep within these winding halls and corridors.
+      </p>
     </div>
   </div>
 
   <!-- Слайдер -->
-  <div class="flex flex-col md:flex-row justify-center items-center mt-10 mb-10 gap-4 px-4">
-    <!-- Кнопка влево -->
-    <button @click="prevImage" class="hover:scale-110 transition-transform flex-shrink-0">
-      <img src="/images/bt-l (2).png" alt="prev" class="w-8 md:w-12 h-auto" />
-    </button>
+  <Slider />
 
-    <!-- Изображения -->
-    <div class="flex justify-center items-center gap-2 md:gap-4 flex-wrap">
-      <!-- Левая (серая) -->
-      <div
-        class="w-[120px] md:w-[250px] lg:w-[384px] h-[120px] md:h-[250px] lg:h-[384px] overflow-hidden rounded-xl grayscale opacity-60 hover:opacity-80 transition-all duration-300">
-        <img :src="images[(currentIndex + images.length - 1) % images.length]" alt="previous"
-          class="w-full h-full object-cover" />
-      </div>
-
-      <!-- Центральная (яркая) -->
-      <div
-        class="w-[150px] md:w-[300px] lg:w-[384px] h-[150px] md:h-[300px] lg:h-[384px] overflow-hidden rounded-xl shadow-lg transition-all duration-500">
-        <img :src="images[currentIndex]" alt="active" class="w-full h-full object-cover" />
-      </div>
-
-      <!-- Правая (серая) -->
-      <div
-        class="w-[120px] md:w-[250px] lg:w-[384px] h-[120px] md:h-[250px] lg:h-[384px] overflow-hidden rounded-xl grayscale opacity-60 hover:opacity-80 transition-all duration-300">
-        <img :src="images[(currentIndex + 1) % images.length]" alt="next" class="w-full h-full object-cover" />
-      </div>
-    </div>
-
-    <!-- Кнопка вправо -->
-    <button @click="nextImage" class="hover:scale-110 transition-transform flex-shrink-0">
-      <img src="/images/bt-r (1).png" alt="next" class="w-8 md:w-12 h-auto" />
-    </button>
-  </div>
-
-  <!--Второй контент -->
+  <!-- Остальной контент -->
   <div class="text-white bg-[#262423] min-h-screen p-4 md:p-10 flex justify-center">
     <div class="max-w-[900px] space-y-4">
       <h1 class="text-xl md:text-2xl font-semibold">TIME IS OF THE ESSENCE</h1>
@@ -308,8 +141,7 @@ const selectIcon = async (index) => {
 
       <p>
         “With SoulSteel, we've found gameplay that we find fun, and we can't stop playing! We have so many cool plans
-        and
-        ideas for where we want to take the journey, and we can't wait to share them with you!” says Noxcrew’s Joe
+        and ideas for where we want to take the journey, and we can't wait to share them with you!” says Noxcrew’s Joe
         Arsenault.
       </p>
 
@@ -318,7 +150,7 @@ const selectIcon = async (index) => {
         Bedrock Edition today!
       </p>
 
-      <p>See you inside! </p>
+      <p>See you inside!</p>
     </div>
   </div>
 
@@ -373,7 +205,7 @@ const selectIcon = async (index) => {
     </div>
   </div>
 
-  <!-- Самый нижний футер -->
+  <!-- Нижний футер -->
   <footer
     class="flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 text-white py-4 px-6 bg-[#262423]">
     <img src="/images/Component 2.png" alt="" class="h-6 md:h-8" />
