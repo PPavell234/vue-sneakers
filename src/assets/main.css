@@ -3,3 +3,8 @@
 body {
   background-color: black;
 }
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
