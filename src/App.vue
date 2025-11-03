@@ -80,7 +80,8 @@ onBeforeUnmount(() => {
       <!-- Меню -->
       <transition name="fade">
         <div v-if="showMenu" id="account-menu"
-          class="absolute top-full mt-2 left-0 w-[182px] h-[131px] bg-[#262423] text-white p-3 rounded-lg shadow-lg z-50">
+          class="absolute top-full mt-2 left-0 w-[182px] h-[131px] bg-[#262423] text-white p-1 shadow-lg z-50 flex">
+          <!-- Левый блок со списком -->
           <ul class="flex flex-col w-full text-sm">
             <li class="px-2 py-1 hover:text-green-500 cursor-pointer">SIGN IN</li>
             <hr class="border-t border-[#33302F] w-full" />
@@ -90,6 +91,11 @@ onBeforeUnmount(() => {
             <hr class="border-t border-[#33302F] w-full" />
             <li class="px-2 py-1 hover:text-green-500 cursor-pointer">REDEEM</li>
           </ul>
+
+          <!-- Вертикальная линия справа -->
+          <div class="flex items-stretch ml-3">
+            <div class="border-l-9 border-[#33302F] h-full"></div>
+          </div>
         </div>
       </transition>
     </div>
