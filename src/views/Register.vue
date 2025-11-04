@@ -81,23 +81,24 @@ onBeforeUnmount(() => {
 
     </header>
 
-    <div class="bg-black text-white py-10 text-center">
-        <!-- Общий контейнер с фиксированной шириной -->
-        <div class="mx-auto" style="width: 800px;">
+    <div class="text-white py-100 text-center bg-[url('/images/register_image.jpg')] bg-cover bg-center bg-no-repeat">
+        <!-- Общий контейнер -->
+        <div class="mx-auto w-full max-w-[800px] px-4">
             <!-- Заголовок -->
-            <div class="bg-[#D0C5C0] py-2 text-black">
+            <div class="bg-[#D0C5C0] py-2 text-black rounded-t-md">
                 <h1 class="text-xl font-semibold">ВОЙТИ ИЛИ ЗАРЕГИСТРИРОВАТЬСЯ</h1>
             </div>
 
             <!-- Основной контейнер -->
-            <div class="flex justify-between items-start bg-black">
+            <div class="flex flex-col md:flex-row justify-between items-stretch bg-black gap-4 md:gap-0">
                 <!-- Левый блок -->
-                <div class="bg-white text-black shadow-md p-12 pb-15 w-[400px] flex flex-col gap-9 ">
+                <div class="bg-white text-black shadow-md p-6 md:p-8 w-full md:w-[400px] flex flex-col gap-6">
                     <a href="#"
-                        class="flex items-center justify-center text-white py-3  hover:opacity-90 transition text-sm md:text-base"
+                        class="flex items-center justify-center text-white py-4 px-4 hover:opacity-90 transition text-sm md:text-base"
                         style="
             background-image: url('/images/button1.svg');
             background-repeat: no-repeat;
+            background-position: bottom left;
             background-size: cover;
           ">
                         ВОЙДИТЕ В УЧЕТНУЮ ЗАПИСЬ С ПОМОЩЬЮ
@@ -116,15 +117,18 @@ onBeforeUnmount(() => {
                 </div>
 
                 <!-- Правый блок -->
-                <div class="bg-[#E9E1E1] text-left text-black p-8 pb-14 w-[400px]">
-                    <p class="mt-0 text-sm md:text-base">
-                        Войдите или зарегистрируйтесь, чтобы без проблем управлять своими играми и кошельком!
+                <div class="bg-[#E9E1E1] text-left text-black p-6 md:p-8 w-full md:w-[400px]">
+                    <p class="mb-3 text-sm md:text-base opacity-90">
+                        Войдите или зарегистрируйтесь, чтобы без проблем управлять своими
+                        играми и кошельком!
                     </p>
 
                     <ul class="list-disc list-inside text-sm md:text-base space-y-2">
                         <li>Покупайте игры Minecraft и Java Realms</li>
                         <li>Меняйте персонажей и имя профиля Java.</li>
-                        <li>Управляйте мирами Java и Bedrock Realms и приглашайте друзей.</li>
+                        <li>
+                            Управляйте мирами Java и Bedrock Realms и приглашайте друзей.
+                        </li>
                     </ul>
                 </div>
             </div>
