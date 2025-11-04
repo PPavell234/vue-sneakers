@@ -81,29 +81,42 @@ onBeforeUnmount(() => {
 
     </header>
 
-    <div class="bg-black text-white py-12 text-center">
+    <div class="bg-black text-white py-8 px-6 md:px-20 text-center">
         <!-- Заголовок -->
-        <div class="bg-[#262423] py-2 mb-0">
-            <h1 class="text-xl font-semibold">ВОЙТИ ИЛИ ЗАРЕГИСТРИРОВАТЬСЯ</h1>
+        <div class="bg-[#D0C5C0] py-2 mb-0 mx-auto w-fit px-53">
+            <h1 class="text-xl font-semibold text-black">ВОЙТИ ИЛИ ЗАРЕГИСТРИРОВАТЬСЯ</h1>
         </div>
 
         <!-- Основной контейнер -->
-        <div class="flex flex-col md:flex-row justify-center items-start gap-0 px-6">
+        <div class="flex flex-col md:flex-row justify-center items-start gap-8 md:gap-0">
 
             <!-- Левый блок -->
-            <div class="bg-white text-black rounded-lg shadow-md p-5 w-full md:w-[320px] flex flex-col gap-7">
+            <div class="bg-white text-black shadow-md p-5 w-full md:w-[350px] flex flex-col gap-7">
                 <a href="#"
-                    class="bg-[#107C10] text-white py-3 px-4 rounded-md hover:bg-green-600 transition text-sm md:text-base">
+                    class="flex items-center justify-center text-white py-4 px-4 hover:opacity-90 transition text-sm md:text-base"
+                    style="
+           background-image: url('/images/button1.svg');
+           background-repeat: no-repeat;
+           background-position: center;
+           background-size: cover;
+         ">
                     ВОЙДИТЕ В УЧЕТНУЮ ЗАПИСЬ С ПОМОЩЬЮ
                 </a>
+
                 <a href="#"
-                    class="bg-[#0078D7] text-white py-3 px-4 rounded-md hover:bg-blue-600 transition text-sm md:text-base">
+                    class="flex items-center justify-center text-white py-4 px-4 hover:opacity-90 transition text-sm md:text-base"
+                    style="
+           background-image: url('/images/button2.svg');
+           background-repeat: no-repeat;
+           background-position: center;
+           background-size: cover;
+         ">
                     ЗАРЕГИСТРИРОВАТЬСЯ
                 </a>
             </div>
 
             <!-- Правый блок -->
-            <div class="bg-[#262423] text-left max-w-[420px] p-2 rounded-lg">
+            <div class="bg-[#E9E1E1] text-left max-w-[420px] p-4 text-black">
                 <p class="mb-3 text-sm md:text-base opacity-90">
                     Войдите или зарегистрируйтесь, чтобы без проблем управлять своими играми и кошельком!
                 </p>
