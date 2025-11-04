@@ -81,51 +81,52 @@ onBeforeUnmount(() => {
 
     </header>
 
-    <div class="bg-black text-white py-8 px-6 md:px-20 text-center">
-        <!-- Заголовок -->
-        <div class="bg-[#D0C5C0] py-2 mb-0 mx-auto w-fit px-53">
-            <h1 class="text-xl font-semibold text-black">ВОЙТИ ИЛИ ЗАРЕГИСТРИРОВАТЬСЯ</h1>
-        </div>
-
-        <!-- Основной контейнер -->
-        <div class="flex flex-col md:flex-row justify-center items-start gap-8 md:gap-0">
-
-            <!-- Левый блок -->
-            <div class="bg-white text-black shadow-md p-5 w-full md:w-[350px] flex flex-col gap-7">
-                <a href="#"
-                    class="flex items-center justify-center text-white py-4 px-4 hover:opacity-90 transition text-sm md:text-base"
-                    style="
-           background-image: url('/images/button1.svg');
-           background-repeat: no-repeat;
-           background-position: center;
-           background-size: cover;
-         ">
-                    ВОЙДИТЕ В УЧЕТНУЮ ЗАПИСЬ С ПОМОЩЬЮ
-                </a>
-
-                <a href="#"
-                    class="flex items-center justify-center text-white py-4 px-4 hover:opacity-90 transition text-sm md:text-base"
-                    style="
-           background-image: url('/images/button2.svg');
-           background-repeat: no-repeat;
-           background-position: center;
-           background-size: cover;
-         ">
-                    ЗАРЕГИСТРИРОВАТЬСЯ
-                </a>
+    <div class="bg-black text-white py-10 text-center">
+        <!-- Общий контейнер с фиксированной шириной -->
+        <div class="mx-auto" style="width: 800px;">
+            <!-- Заголовок -->
+            <div class="bg-[#D0C5C0] py-2 text-black">
+                <h1 class="text-xl font-semibold">ВОЙТИ ИЛИ ЗАРЕГИСТРИРОВАТЬСЯ</h1>
             </div>
 
-            <!-- Правый блок -->
-            <div class="bg-[#E9E1E1] text-left max-w-[420px] p-4 text-black">
-                <p class="mb-3 text-sm md:text-base opacity-90">
-                    Войдите или зарегистрируйтесь, чтобы без проблем управлять своими играми и кошельком!
-                </p>
+            <!-- Основной контейнер -->
+            <div class="flex justify-between items-start bg-black">
+                <!-- Левый блок -->
+                <div class="bg-white text-black shadow-md p-12 pb-15 w-[400px] flex flex-col gap-9 ">
+                    <a href="#"
+                        class="flex items-center justify-center text-white py-3  hover:opacity-90 transition text-sm md:text-base"
+                        style="
+            background-image: url('/images/button1.svg');
+            background-repeat: no-repeat;
+            background-size: cover;
+          ">
+                        ВОЙДИТЕ В УЧЕТНУЮ ЗАПИСЬ С ПОМОЩЬЮ
+                    </a>
 
-                <ul class="list-disc list-inside text-sm md:text-base space-y-2">
-                    <li>Покупайте игры Minecraft и Java Realms</li>
-                    <li>Меняйте персонажей и имя профиля Java.</li>
-                    <li>Управляйте мирами Java и Bedrock Realms и приглашайте друзей.</li>
-                </ul>
+                    <a href="#"
+                        class="flex items-center justify-center text-white py-4 px-4 hover:opacity-90 transition text-sm md:text-base"
+                        style="
+            background-image: url('/images/button2.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+          ">
+                        ЗАРЕГИСТРИРОВАТЬСЯ
+                    </a>
+                </div>
+
+                <!-- Правый блок -->
+                <div class="bg-[#E9E1E1] text-left text-black p-8 pb-14 w-[400px]">
+                    <p class="mt-0 text-sm md:text-base">
+                        Войдите или зарегистрируйтесь, чтобы без проблем управлять своими играми и кошельком!
+                    </p>
+
+                    <ul class="list-disc list-inside text-sm md:text-base space-y-2">
+                        <li>Покупайте игры Minecraft и Java Realms</li>
+                        <li>Меняйте персонажей и имя профиля Java.</li>
+                        <li>Управляйте мирами Java и Bedrock Realms и приглашайте друзей.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
