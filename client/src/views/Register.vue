@@ -48,9 +48,7 @@ onBeforeUnmount(() => {
                 <div class="bg-white text-black shadow-md p-6 md:p-8 w-full md:w-[400px] flex flex-col gap-6">
                     <a href="#"
                         class="flex items-center justify-center text-white py-4 px-4 hover:opacity-90 transition text-sm md:text-base"
-                        style="
-      background: url('/images/button1.svg') no-repeat bottom left / 100% auto;
-   ">
+                        style="background: url('/images/button1.svg') no-repeat bottom left / 100% auto;">
                         ВОЙДИТЕ В УЧЕТНУЮ ЗАПИСЬ С ПОМОЩЬЮ
                     </a>
 
