@@ -1,9 +1,8 @@
-import express from "express";
-import { register, login } from "../controllers/api.js";
-
+const express = require("express");
 const router = express.Router();
 
-router.post("/register", register);
-router.post("/login", login);
+router.get("/", (req, res) => {
+  res.json({ message: "Post route works!" });
+});
 
-export default router;
+module.exports = router;

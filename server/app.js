@@ -3,20 +3,28 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
-const router = express.Router();
+
+// Импорт роутов
+const postRoutes = require("./routes/routes");
+const authRoutes = require("./routes/auth");
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Middlewares
-app.use(cors());
+// --- Middleware ---
+app.use(
+  cors({
+    origin: "http://localhost:5173", // адрес твоего фронтенда
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Раздача изображений из папки server/uploads
+// --- Раздача изображений ---
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// MongoDB connection
+// --- Подключение к MongoDB ---
 mongoose
   .connect(process.env.DB_URL, {
     useNewUrlParser: true,
@@ -25,14 +33,16 @@ mongoose
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// Routes
-router.get("/", (req, res) => {
-  res.json({ message: "Post route works!" });
+// --- Роуты ---
+app.use("/api/post", postRoutes);
+app.use("/api/auth", authRoutes); // 👈 добавь это!
+
+// --- Тестовый маршрут ---
+app.get("/", (req, res) => {
+  res.json({ message: "Server is working 🚀" });
 });
 
-module.exports = router; // ← ОБЯЗАТЕЛЬНО!
-
-// Start server
+// --- Запуск сервера ---
 app.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
 });
