@@ -1,13 +1,12 @@
 import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import express from "express";
 
+// Регистрация
 export const register = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Проверяем существование
     const candidate = await User.findOne({ email });
     if (candidate)
       return res
@@ -24,6 +23,7 @@ export const register = async (req, res) => {
   }
 };
 
+// Логин
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;

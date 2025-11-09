@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
-// Импорт роутов
 const postRoutes = require("./routes/routes");
 const authRoutes = require("./routes/auth");
 
@@ -14,7 +13,7 @@ const port = process.env.PORT || 5000;
 // --- Middleware ---
 app.use(
   cors({
-    origin: "http://localhost:5173", // адрес твоего фронтенда
+    origin: "http://localhost:5173", // адрес фронтенда Vite
     credentials: true,
   })
 );
@@ -30,19 +29,19 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("✅ Connected to MongoDB"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // --- Роуты ---
 app.use("/api/post", postRoutes);
-app.use("/api/auth", authRoutes); // 👈 добавь это!
+app.use("/api/auth", authRoutes);
 
-// --- Тестовый маршрут ---
+// --- Тест ---
 app.get("/", (req, res) => {
-  res.json({ message: "Server is working 🚀" });
+  res.json({ message: "Server is working" });
 });
 
-// --- Запуск сервера ---
+// --- Запуск ---
 app.listen(port, () => {
-  console.log(`🚀 Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
