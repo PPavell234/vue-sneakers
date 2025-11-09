@@ -16,9 +16,14 @@ const handleNext = () => {
                 <input type="text" id="userInput" placeholder="someone@example.com"
                     class=" my-5 w-full mt-5 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" />
             </div>
-            <div class="flex flex-col md:flex-row justify-end gap-4">
-                <button>Назад</button>
-                <button>Вперед</button>
+            <div class="flex flex-col md:flex-row items-center  justify-end gap-4">
+                <div class="bg-[#cccccc]">
+                    <button class="p-3">Назад</button>
+                </div>
+                <div class="text-white bg-[#107c10]">
+                    <button class="p-3">Вперед</button>
+                </div>
+
             </div>
         </div>
 
