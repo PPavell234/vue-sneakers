@@ -1,9 +1,5 @@
 <script setup>
 import { ref, onMounted, nextTick, onBeforeUnmount } from 'vue'
-import Header from '@/components/Header.vue'
-import VideoPlayer from '@/components/VideoPlayer.vue'
-import Reactions from '@/components/Reactions.vue'
-import Slider from '@/components/Slider.vue'
 
 
 const showMenu = ref(false)

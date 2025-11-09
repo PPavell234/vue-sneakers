@@ -17,7 +17,7 @@ export const register = async (req, res) => {
     const user = new User({ email, password: hash });
     await user.save();
 
-    res.json({ message: "Пользователь зарегистрирован ✅" });
+    res.json({ message: "Пользователь зарегистрирован" });
   } catch (err) {
     res.status(500).json({ message: "Ошибка сервера", err });
   }
@@ -38,7 +38,7 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ userId: user._id }, "SECRET_KEY");
 
-    res.json({ message: "Успешный вход ✅", token });
+    res.json({ message: "Успешный вход", token });
   } catch (err) {
     res.status(500).json({ message: "Ошибка сервера", err });
   }
