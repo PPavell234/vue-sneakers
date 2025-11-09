@@ -1,9 +1,7 @@
 <script setup>
 import { ref, onMounted, nextTick, onBeforeUnmount } from 'vue'
 import Header from '@/components/Header.vue'
-import VideoPlayer from '@/components/VideoPlayer.vue'
-import Reactions from '@/components/Reactions.vue'
-import Slider from '@/components/Slider.vue'
+
 
 
 const showMenu = ref(false)
@@ -56,7 +54,7 @@ onBeforeUnmount(() => {
                             ВОЙДИТЕ В УЧЕТНУЮ ЗАПИСЬ С ПОМОЩЬЮ
                         </a>
 
-                        <a href="#"
+                        <a href="http://localhost:5173/register/registerProf"
                             class="flex items-center justify-center text-white py-4 px-4 hover:opacity-90 transition text-sm md:text-base"
                             style="
             background-image: url('/images/button2.svg');
