@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+const router = express.Router();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -25,7 +26,11 @@ mongoose
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Routes
-app.use("/api/post", require("./routes/routes"));
+router.get("/", (req, res) => {
+  res.json({ message: "Post route works!" });
+});
+
+module.exports = router; // ← ОБЯЗАТЕЛЬНО!
 
 // Start server
 app.listen(port, () => {

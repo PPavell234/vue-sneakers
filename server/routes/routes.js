@@ -1,10 +1,9 @@
-// server/routes/routes.js
-const express = require("express");
+import express from "express";
+import { register, login } from "../controllers/api.js";
+
 const router = express.Router();
 
-// Пример маршрута GET
-router.get("/", (req, res) => {
-  res.json({ message: "🚀 API is working!" });
-});
+router.post("/register", register);
+router.post("/login", login);
 
-module.exports = router;
+export default router;
