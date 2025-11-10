@@ -78,7 +78,9 @@ onBeforeUnmount(() => {
                         </li>
                         <hr class="border-t border-[#33302F] w-full" />
 
-                        <li class="flex flex-row items-center justify-center gap-2 py-4">
+
+                        <li
+                            class="flex flex-row items-center justify-center gap-2 py-4 transform scale-[1.3] origin-center">
                             <p class="text-white text-xs whitespace-nowrap">MINECOINS</p>
 
                             <div class="relative w-[110px] h-8 flex items-center justify-center">
@@ -91,7 +93,7 @@ onBeforeUnmount(() => {
                                 </div>
                             </div>
 
-                            <img src="/images/add.png" class="cursor-pointer w-4" />
+                            <img src="/images/add.png" class="size-5 w-5 cursor-pointer" />
                         </li>
                     </ul>
 
