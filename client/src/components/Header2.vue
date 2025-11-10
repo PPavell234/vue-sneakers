@@ -57,17 +57,27 @@ onBeforeUnmount(() => {
                     class="absolute top-full mt-2 left-0 w-[182px] h-[131px] bg-[#262423] text-white p-1 shadow-lg z-50 flex">
                     <!-- Левый блок со списком -->
                     <ul class="flex flex-col w-full text-sm">
+                        <li>
+                            <img src="" alt="">
+                            <p>NameProfile</p>
+                        </li>
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">
-                            <a href="http://localhost:5173/register" class="block w-full h-full">SIGN IN</a>
+                            <a href="http://localhost:5173/register" class="block w-full h-full">ПРОФИЛЬ</a>
                         </li>
                         <hr class="border-t border-[#33302F] w-full" />
-                        <li class="px-2 py-1 hover:text-green-500 cursor-pointer">CREATE ACCOUNT2</li>
+                        <li class="px-2 py-1 hover:text-green-500 cursor-pointer">ЗАГРУЗИТЬ</li>
                         <hr class="border-t border-[#33302F] w-full" />
-                        <li class="px-2 py-1 hover:text-green-500 cursor-pointer">DOWNLOAD2</li>
+                        <li class="px-2 py-1 hover:text-green-500 cursor-pointer">АКТИВИРОВАТЬ</li>
                         <hr class="border-t border-[#33302F] w-full" />
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">
-                            <a href="http://localhost:5173/" class="block w-full h-full">REDEEM2</a>
+                            <a href="http://localhost:5173/" class="block w-full h-full">ВЫЙТИ</a>
                         </li>
+                        <hr class="border-t border-[#33302F] w-full" />
+                        <ul>
+                            <p>MINECOINS</p>
+
+                            <img src="" alt="">
+                        </ul>
                     </ul>
 
                     <!-- Вертикальная линия справа -->
