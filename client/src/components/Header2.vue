@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, nextTick, onBeforeUnmount } from 'vue'
+import { useUserStore } from '@/stores/user'
 
 
 const showMenu = ref(false)
@@ -23,6 +24,12 @@ onMounted(() => {
 onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside)
 })
+
+
+//Почта ---
+const userStore = useUserStore()
+
+
 </script>
 
 <template>
@@ -59,7 +66,8 @@ onBeforeUnmount(() => {
                     <ul class="flex flex-col w-full text-sm flex-1">
                         <li class="flex items-center gap-2 px-2 py-1">
                             <img src="" alt="" class="w-6 h-6 rounded-full bg-gray-700" />
-                            <p>NameProfile</p>
+                            <!-- 🟢 показываем email, если есть -->
+                            <p>{{ userStore.email || 'NameProfile' }}</p>
                         </li>
 
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">

@@ -25,11 +25,11 @@ const handleNext = async () => {
         if (res.ok) {
             alert("Регистрация успешна!")
 
-            // обновляем реактивное состояние
+            //Добавление почты
             userStore.setRegistered(true)
+            userStore.setEmail(email.value)
 
-            // 👉 перенаправляем на главную страницу
-            router.push('/')
+            router.push('/') // переход на главную
         } else {
             alert(data.message)
         }
@@ -38,6 +38,7 @@ const handleNext = async () => {
         alert("Ошибка соединения с сервером")
     }
 }
+
 </script>
 
 <template>
