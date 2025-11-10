@@ -54,36 +54,49 @@ onBeforeUnmount(() => {
             <!-- Меню -->
             <transition name="fade">
                 <div v-if="showMenu" id="account-menu"
-                    class="absolute top-full mt-2 left-0 w-[182px] h-[131px] bg-[#262423] text-white p-1 shadow-lg z-50 flex">
-                    <!-- Левый блок со списком -->
-                    <ul class="flex flex-col w-full text-sm">
-                        <li>
-                            <img src="" alt="">
+                    class="absolute top-full mt-2 right-2 w-[300px] bg-[#262423] text-white p-2 shadow-lg z-50 flex rounded-xl">
+                    <!-- Левая колонка -->
+                    <ul class="flex flex-col w-full text-sm flex-1">
+                        <li class="flex items-center gap-2 px-2 py-1">
+                            <img src="" alt="" class="w-6 h-6 rounded-full bg-gray-700" />
                             <p>NameProfile</p>
                         </li>
+
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">
                             <a href="http://localhost:5173/register" class="block w-full h-full">ПРОФИЛЬ</a>
                         </li>
                         <hr class="border-t border-[#33302F] w-full" />
+
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">ЗАГРУЗИТЬ</li>
                         <hr class="border-t border-[#33302F] w-full" />
+
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">АКТИВИРОВАТЬ</li>
                         <hr class="border-t border-[#33302F] w-full" />
+
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">
                             <a href="http://localhost:5173/" class="block w-full h-full">ВЫЙТИ</a>
                         </li>
                         <hr class="border-t border-[#33302F] w-full" />
-                        <ul>
-                            <p>MINECOINS</p>
 
-                            <img src="" alt="">
-                        </ul>
+                        <li class="flex flex-row items-center justify-center gap-2 py-4">
+                            <p class="text-white text-xs whitespace-nowrap">MINECOINS</p>
+
+                            <div class="relative w-[110px] h-8 flex items-center justify-center">
+                                <div class="absolute inset-0 bg-no-repeat bg-center bg-contain"
+                                    style="background-image: url('/images/button2.svg');"></div>
+
+                                <img src="/images/coin.svg" class="absolute left-1 top-1/2 -translate-y-1/2 w-4" />
+
+                                <div class="absolute left-6 top-1/2 -translate-y-1/2 text-white font-bold text-xs">1
+                                </div>
+                            </div>
+
+                            <img src="/images/add.png" class="cursor-pointer w-4" />
+                        </li>
                     </ul>
 
-                    <!-- Вертикальная линия справа -->
-                    <div class="flex items-stretch ml-3">
-                        <div class="border-l-9 border-[#33302F] h-full"></div>
-                    </div>
+                    <!-- Правая вертикальная линия -->
+                    <div class="border-l border-[#33302F] ml-2"></div>
                 </div>
             </transition>
         </div>
