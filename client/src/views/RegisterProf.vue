@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'  // 👈 подключаем роутер
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user' // импорт стора
 
 const router = useRouter()
+const userStore = useUserStore() // подключаем стор
+
 const email = ref('')
 const password = ref('')
 
@@ -18,16 +21,18 @@ const handleNext = async () => {
         })
 
         const data = await res.json()
-        console.log(data)
 
         if (res.ok) {
-            alert("✅ Регистрация успешна!")
-            // 👉 Перенаправление на главную страницу
+            alert("Регистрация успешна!")
+
+            // обновляем реактивное состояние
+            userStore.setRegistered(true)
+
+            // 👉 перенаправляем на главную страницу
             router.push('/')
         } else {
             alert(data.message)
         }
-
     } catch (err) {
         console.error(err)
         alert("Ошибка соединения с сервером")
@@ -50,7 +55,6 @@ const handleNext = async () => {
 
             <div class="flex flex-col md:flex-row items-center justify-end gap-4">
                 <button class="p-3 bg-[#cccccc]">Назад</button>
-
                 <button @click="handleNext" class="p-3 bg-[#107c10] text-white">
                     Вперед
                 </button>
