@@ -19,3 +19,12 @@ spline-viewer::after {
   background: transparent;
   pointer-events: none;
 }
+
+.spline-crop {
+  overflow: hidden;
+}
+
+/* Обрезаем нижние 60px (подбери под свою сцену) */
+.spline-cut {
+  clip-path: inset(0px 0px 60px 0px);
+}

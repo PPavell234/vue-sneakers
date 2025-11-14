@@ -23,46 +23,43 @@ const handleClickOutside = (event) => {
     }
 }
 
-onMounted(() => {
-    document.addEventListener('click', handleClickOutside)
+//Spline-3D
 
-    const script = document.createElement('script')
-    script.type = 'module'
-    script.src = 'https://unpkg.com/@splinetool/viewer@1.11.2/build/spline-viewer.js'
-    script.onload = () => {
-        removeSplineBranding()
-    }
-    document.head.appendChild(script)
-})
+function moveBottomObjectsDown(viewer, limitY = -10, offset = -200) {
+    const scene = viewer?.scene;
+    if (!scene) return;
 
-function removeSplineBranding() {
-    const observer = new MutationObserver(() => {
-        const viewer = document.querySelector('spline-viewer')
-        if (!viewer || !viewer.shadowRoot) return
+    // обходим ВСЕ объекты в Сцены
+    scene.traverse(obj => {
+        if (!obj.position) return;
 
-        // Все возможные элементы брендинга
-        const selectors = [
-            '[data-label="branding"]',
-            '[part="branding"]',
-            '.branding',
-            '.watermark',
-            'a[href*="spline.design"]',
-            'a[aria-label*="Spline"]'
-        ]
-
-        selectors.forEach((sel) => {
-            const el = viewer.shadowRoot.querySelector(sel)
-            if (el) {
-                el.remove()
-            }
-        })
-    })
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    })
+        // если объект находится ниже определённой высоты — смещаем
+        if (obj.position.y < limitY) {
+            obj.position.y += offset;  // уводим вниз
+        }
+    });
 }
+
+function initSpline() {
+    const viewer = document.querySelector("spline-viewer");
+    if (!viewer) return;
+
+    viewer.addEventListener("load", () => {
+        // пытаемся сдвинуть watermark вниз
+        moveBottomObjectsDown(viewer, -5, -300);
+    });
+}
+
+onMounted(() => {
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = 'https://unpkg.com/@splinetool/viewer@1.11.2/build/spline-viewer.js';
+    script.onload = () => {
+        // небольшая задержка, чтобы сцена прогрузилась
+        setTimeout(initSpline, 300)
+    };
+    document.head.appendChild(script);
+});
 
 onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside)
@@ -86,9 +83,10 @@ spline-viewer::part(branding) {
         </section>
 
         <!-- Глобальный Spline слой (fixed) -->
-        <div class="fixed inset-0 pointer-events-none" style="z-index:5;">
-            <spline-viewer url="https://prod.spline.design/ziIbK-A1dXgwGdDS/scene.splinecode"
-                style="width:100%; height:100%; pointer-events:none; background:transparent;"></spline-viewer>
+        <div class="spline-crop fixed inset-0 pointer-events-none" style="z-index:5;">
+            <spline-viewer class="spline-cut" url="https://prod.spline.design/ziIbK-A1dXgwGdDS/scene.splinecode"
+                style="width:100%; height:100%; pointer-events:none; background:transparent;">
+            </spline-viewer>
         </div>
 
 
