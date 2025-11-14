@@ -22,11 +22,17 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
     document.addEventListener('click', handleClickOutside)
+
+    const script = document.createElement('script')
+    script.type = 'module'
+    script.src = 'https://unpkg.com/@splinetool/viewer@1.11.2/build/spline-viewer.js'
+    document.head.appendChild(script)
 })
 
 onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside)
 })
+
 </script>
 
 
@@ -34,6 +40,17 @@ onBeforeUnmount(() => {
     <div>
         <!-- Шапка -->
         <Header />
+
+        <section>
+
+        </section>
+
+        <!-- Глобальный Spline слой (fixed) -->
+        <div class="fixed inset-0 pointer-events-none" style="z-index:5; background:transparent;">
+            <spline-viewer url="https://prod.spline.design/ziIbK-A1dXgwGdDS/scene.splinecode"
+                style="width:100%; height:100%; background: transparent; pointer-events: none;">
+            </spline-viewer>
+        </div>
 
         <div
             class="text-white py-100 text-center bg-[url('/images/register_image.jpg')] bg-cover bg-center bg-no-repeat">
