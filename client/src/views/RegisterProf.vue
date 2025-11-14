@@ -1,8 +1,8 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue' // onMounted, onBeforeUnmount - Для Spline-3D
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user' // импорт стора
-import '@/assets/main.css'
+import '@/assets/main.css' //импорт стилей , нужно также для Spline элементов
 const router = useRouter()
 const userStore = useUserStore() // подключаем стор
 
