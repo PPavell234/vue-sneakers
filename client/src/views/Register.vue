@@ -1,12 +1,15 @@
 <script setup>
-import { ref, onMounted, nextTick, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import Header from '@/components/Header.vue'
 import VideoPlayer from '@/components/VideoPlayer.vue'
 import Reactions from '@/components/Reactions.vue'
 import Slider from '@/components/Slider.vue'
 
+import '@/assets/main.css'
 
 const showMenu = ref(false)
+const scriptLoaded = ref(false)
+
 const toggleMenu = () => {
     showMenu.value = !showMenu.value
 }
@@ -26,14 +29,51 @@ onMounted(() => {
     const script = document.createElement('script')
     script.type = 'module'
     script.src = 'https://unpkg.com/@splinetool/viewer@1.11.2/build/spline-viewer.js'
+    script.onload = () => {
+        removeSplineBranding()
+    }
     document.head.appendChild(script)
 })
+
+function removeSplineBranding() {
+    const observer = new MutationObserver(() => {
+        const viewer = document.querySelector('spline-viewer')
+        if (!viewer || !viewer.shadowRoot) return
+
+        // Все возможные элементы брендинга
+        const selectors = [
+            '[data-label="branding"]',
+            '[part="branding"]',
+            '.branding',
+            '.watermark',
+            'a[href*="spline.design"]',
+            'a[aria-label*="Spline"]'
+        ]
+
+        selectors.forEach((sel) => {
+            const el = viewer.shadowRoot.querySelector(sel)
+            if (el) {
+                el.remove()
+            }
+        })
+    })
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    })
+}
 
 onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside)
 })
-
 </script>
+
+<style>
+spline-viewer::part(branding) {
+    opacity: 0 !important;
+}
+</style>
 
 
 <template>
@@ -46,11 +86,11 @@ onBeforeUnmount(() => {
         </section>
 
         <!-- Глобальный Spline слой (fixed) -->
-        <div class="fixed inset-0 pointer-events-none" style="z-index:5; background:transparent;">
+        <div class="fixed inset-0 pointer-events-none" style="z-index:5;">
             <spline-viewer url="https://prod.spline.design/ziIbK-A1dXgwGdDS/scene.splinecode"
-                style="width:100%; height:100%; background: transparent; pointer-events: none;">
-            </spline-viewer>
+                style="width:100%; height:100%; pointer-events:none; background:transparent;"></spline-viewer>
         </div>
+
 
         <div
             class="text-white py-100 text-center bg-[url('/images/register_image.jpg')] bg-cover bg-center bg-no-repeat">
@@ -177,4 +217,6 @@ onBeforeUnmount(() => {
             </ul>
         </footer>
     </div>
+
+
 </template>

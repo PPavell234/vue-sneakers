@@ -8,3 +8,14 @@ img {
   -webkit-user-drag: none;
   user-drag: none;
 }
+
+spline-viewer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px; /* высота области где надпись */
+  background: transparent;
+  pointer-events: none;
+}
