@@ -92,8 +92,8 @@ mevn_full_stack_app/
 Клонируйте репозиторий и установите зависимости:
 
 ```bash
-git clone https://github.com/PPavell234/mevn_full_stack_app
-cd .......\mevn_full_stack_app
+git clone https://github.com/PPavell234/vue-sneakers.git
+cd .......\vue-sneakers
 ```
 
 ---
@@ -126,7 +126,7 @@ cd .......\mevn_full_stack_app\client
 Установите зависимости и запустите клиент:
 ```bash
 npm install
-npm run serve
+npm run dev
 ```
 
 Клиент будет доступен по адресу **http://localhost:8080**
@@ -139,14 +139,14 @@ npm run serve
 Используется локальная база данных по адресу:
 
 ```bash
-DB_URL = mongodb://localhost:27017/mevn_full_stack
+DB_URL = mongodb://localhost:27017/vue-sneakers
 PORT = 5000
 ```
 
 
 Вы можете открыть MongoDB Compass, нажать "New Connection", и вставить строку подключения:
 
-**mongodb://localhost:27017/mevn_full_stack**
+**mongodb://localhost:27017/vue-sneakers**
 
 
 После запуска сервера вы сможете увидеть коллекции, создаваемые приложением в MongoDB.
