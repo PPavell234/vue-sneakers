@@ -1,44 +1,171 @@
-# vue-sneakers
+<div align="center">
+  
+  <h1>MEVN Full Stack App</h1>
+  <p>Full-stack web application built with MongoDB, Express, Vue.js, and Node.js 🚀</p>
 
-This template should help get you started developing with Vue 3 in Vite.
+<!-- Badges -->
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT)
+![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/mevn_full_stack_app)
+![GitHub repo size](https://img.shields.io/github/repo-size/yourusername/mevn_full_stack_app)
+![GitHub stars](https://img.shields.io/github/stars/yourusername/mevn_full_stack_app?style=social)
+![GitHub forks](https://img.shields.io/github/forks/yourusername/mevn_full_stack_app?style=social)
 
-## Recommended IDE Setup
+<h4>
+    <a href="https://github.com/yourusername/mevn_full_stack_app/issues/new?template=bug_report.md&title=[BUG]">Report Bug</a>
+  <span> · </span>
+    <a href="https://github.com/yourusername/mevn_full_stack_app/issues/new?template=feature_request.md&title=[FR]">Request Feature</a>
+</h4>
+</div>
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## 🌟 About the Project
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+**MEVN Full Stack App** — это учебный и демонстрационный проект, основанный на стеке:
+- **MongoDB** — база данных  
+- **Express.js** — серверная логика  
+- **Vue.js** — фронтенд  
+- **Node.js** — серверное окружение  
 
-## Customize configuration
+Проект демонстрирует, как можно связать backend и frontend в одном приложении, используя REST API и современные подходы к разработке на JavaScript.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+---
 
-```sh
-npm install
+## ⚙️ Project Structure
+
+```
+mevn_full_stack_app/
+│
+├── client/      # Vue.js frontend
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── server/      # Node.js + Express backend
+│   ├── models/
+│   ├── routes/
+│   └── package.json
+│
+└── README.md
 ```
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
+## 🧰 Tech Stack
+
+<details>
+<summary>Server</summary>
+<ul>
+  <li><a href="https://nodejs.org/">Node.js</a></li>
+  <li><a href="https://expressjs.com/">Express.js</a></li>
+  <li><a href="https://www.mongodb.com/">MongoDB</a></li>
+  <li><a href="https://mongoosejs.com/">Mongoose</a></li>
+</ul>
+</details>
+
+<details>
+<summary>Client</summary>
+<ul>
+  <li><a href="https://vuejs.org/">Vue.js</a></li>
+  <li><a href="https://cli.vuejs.org/">Vue CLI</a></li>
+  <li><a href="https://vuetifyjs.com/">Vuetify</a></li>
+  <li><a href="https://axios-http.com/">Axios</a></li>
+</ul>
+</details>
+
+<details>
+<summary>Dev Tools</summary>
+<ul>
+  <li><a href="https://nodemon.io/">Nodemon</a></li>
+  <li><a href="https://eslint.org/">ESLint</a></li>
+  <li><a href="https://prettier.io/">Prettier</a></li>
+</ul>
+</details>
+
+---
+
+## 🧭 Getting Started
+
+### 📦 Installation
+
+Клонируйте репозиторий и установите зависимости:
+
+```bash
+git clone https://github.com/PPavell234/mevn_full_stack_app
+cd .......\mevn_full_stack_app
+```
+
+---
+
+
+### 🖥️ Запуск сервера (Backend)
+
+Перейдите в директорию `server`:
+```bash
+cd .......\mevn_full_stack_app\server
+```
+
+Установите зависимости и запустите сервер:
+```bash
+npm install
 npm run dev
 ```
 
-### Compile and Minify for Production
+По умолчанию сервер запустится на **http://localhost:5000**
 
-```sh
-npm run build
+---
+
+### 💻 Запуск клиента (Frontend)
+
+Перейдите в директорию `client`:
+```bash
+cd .......\mevn_full_stack_app\client
 ```
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+Установите зависимости и запустите клиент:
+```bash
+npm install
+npm run serve
 ```
+
+Клиент будет доступен по адресу **http://localhost:8080**
+
+---
+
+### 🗄️ Database Configuration (MongoDB)
+
+Проект подключается к базе данных MongoDB через MongoDB Compass.
+Используется локальная база данных по адресу:
+
+```bash
+DB_URL = mongodb://localhost:27017/mevn_full_stack
+PORT = 5000
+```
+
+
+Вы можете открыть MongoDB Compass, нажать "New Connection", и вставить строку подключения:
+
+**mongodb://localhost:27017/mevn_full_stack**
+
+
+После запуска сервера вы сможете увидеть коллекции, создаваемые приложением в MongoDB.
+
+---
+
+## Features
+
+✅ REST API  
+✅ CRUD операции  
+✅ Подключение к MongoDB  
+✅ UI с Vuetify  
+✅ Разделённый frontend и backend  
+
+---
+
+
+---
+
+<div align="center">
+  <b>Made with ❤️ using the MEVN stack</b>
+</div>
