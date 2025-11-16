@@ -28,3 +28,11 @@ spline-viewer::after {
 .spline-cut {
   clip-path: inset(0px 0px 60px 0px);
 }
+
+/*Шрифты--- */
+@font-face {
+  font-family: 'Minecraft';
+  src: url('/src/assets/fonts/minecraft.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

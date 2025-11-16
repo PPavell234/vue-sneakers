@@ -33,7 +33,7 @@ onBeforeUnmount(() => {
 })
 
 //Меняет отображение иконки -
-const checked = ref(false)
+const checked1 = ref(false);
 </script>
 
 
@@ -111,6 +111,47 @@ const checked = ref(false)
                     </div>
 
                 </div>
+
+
+                <!-- Один товар -->
+                <div class="flex flex-col w-full max-w-[250px] bg-[#1f1e1d] text-white pl-15 pr-15 rounded-lg gap-12">
+
+                    <div class="flex flex-col items-center gap-3">
+                        <img src="/images/CoinHome/coins.png" alt="" class="" />
+                        <p class="text-xl font-bold">320</p>
+                    </div>
+
+                    <!-- Разделитель -->
+                    <div class="-mt-1">
+                        <hr class="border-t border-[#33302F]" />
+                    </div>
+
+                    <!-- Чекбокс-кнопка -->
+                    <div class="flex flex-row justify-center gap-2.5 mb-5 -mt-6">
+                        <label class="cursor-pointer inline-flex flex-col items-center">
+                            <input type="checkbox" v-model="checked1" class="hidden" />
+                            <img :src="checked1 ? '/images/CoinHome/buttch1.png' : '/images/CoinHome/buttch2.png'"
+                                class="w-8 h-8" alt="checkbox" />
+                        </label>
+                        <div class="px-1">
+                            <p>1200руб</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex flex-col items-center py-2">
+                <a href="http://localhost:5173/register/registerProf"
+                    class="flex items-center justify-center text-black py-4 px-15 hover:opacity-90 transition text-sm md:text-base"
+                    style="
+        background-image: url('/images/CoinHome/button1.png');
+        background-repeat: no-repeat;
+        background-position: center;
+       	background-size: cover;
+   ">
+                    ОПЛАТИТЬ
+                </a>
             </div>
 
 
