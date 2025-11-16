@@ -6,6 +6,8 @@ import Slider from '@/components/Slider.vue'
 import { useUserStore } from '@/stores/user'
 import Header from '@/components/Header.vue'
 import Header2 from '@/components/Header2.vue'
+import CoinItem from "@/components/CoinItem.vue";
+
 
 const userStore = useUserStore()
 
@@ -32,8 +34,44 @@ onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside)
 })
 
-//Меняет отображение иконки -
-const checked1 = ref(false);
+//Отображение списка карточек ---
+
+const selected = ref(null); // id активной карточки
+
+const coins = [
+    {
+        id: 1,
+        image: "/images/CoinHome/coins.png",
+        amount: 320,
+        price: 1200
+    },
+    {
+        id: 2,
+        image: "/images/CoinHome/coins.png",
+        amount: 550,
+        price: 2000
+    },
+    {
+        id: 3,
+        image: "/images/CoinHome/coins.png",
+        amount: 1000,
+        price: 3500
+    },
+    {
+        id: 4,
+        image: "/images/CoinHome/coins.png",
+        amount: 1000,
+        price: 1000000
+    },
+    {
+        id: 5,
+        image: "/images/CoinHome/coins.png",
+        amount: 1000,
+        price: 1000000000
+    }
+
+];
+
 </script>
 
 
@@ -67,8 +105,8 @@ const checked1 = ref(false);
         <div class="flex flex-col items-center gap-3 py-55">
 
             <!-- Заголовок -->
-            <div class="flex flex-col items-center gap-7">
-                <H1>КУПИТЬ МАЙНКОИНЫ</H1>
+            <div class="flex flex-col  items-center gap-7">
+                <p class="font-bold font-[700] text-5xl">КУПИТЬ МАЙНКОИНЫ</p>
                 <p class="max-w-[800px] mx-auto px-2">
                     Майнкоины — это виртуальная валюта Minecraft. С ее помощью можно преобразовать миры,
                     отправиться на поиски эпичных сюжетных приключений, придать уникальный вид своему персонажу
@@ -84,62 +122,8 @@ const checked1 = ref(false);
 
             <!-- Товары -->
             <div class="flex flex-row justify-center gap-4 mb-1">
-                <!-- Один товар -->
-                <div class="flex flex-col w-full max-w-[250px] bg-[#1f1e1d] text-white pl-15 pr-15 rounded-lg gap-12">
-
-                    <div class="flex flex-col items-center gap-3">
-                        <img src="/images/CoinHome/coins.png" alt="" class="" />
-                        <p class="text-xl font-bold">320</p>
-                    </div>
-
-                    <!-- Разделитель -->
-                    <div class="-mt-1">
-                        <hr class="border-t border-[#33302F]" />
-                    </div>
-
-                    <!-- Чекбокс-кнопка -->
-                    <div class="flex flex-row justify-center gap-2.5 mb-5 -mt-6">
-                        <label class="cursor-pointer inline-flex flex-col items-center">
-                            <input type="checkbox" v-model="checked1" class="hidden" />
-                            <img :src="checked1 ? '/images/CoinHome/buttch1.png' : '/images/CoinHome/buttch2.png'"
-                                class="w-8 h-8" alt="checkbox" />
-                        </label>
-                        <div class="px-1">
-                            <p>1200руб</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Один товар -->
-                <div class="flex flex-col w-full max-w-[250px] bg-[#1f1e1d] text-white pl-15 pr-15 rounded-lg gap-12">
-
-                    <div class="flex flex-col items-center gap-3">
-                        <img src="/images/CoinHome/coins.png" alt="" class="" />
-                        <p class="text-xl font-bold">320</p>
-                    </div>
-
-                    <!-- Разделитель -->
-                    <div class="-mt-1">
-                        <hr class="border-t border-[#33302F]" />
-                    </div>
-
-                    <!-- Чекбокс-кнопка -->
-                    <div class="flex flex-row justify-center gap-2.5 mb-5 -mt-6">
-                        <label class="cursor-pointer inline-flex flex-col items-center">
-                            <input type="checkbox" v-model="checked1" class="hidden" />
-                            <img :src="checked1 ? '/images/CoinHome/buttch1.png' : '/images/CoinHome/buttch2.png'"
-                                class="w-8 h-8" alt="checkbox" />
-                        </label>
-                        <div class="px-1">
-                            <p>1200руб</p>
-                        </div>
-
-                    </div>
-
-                </div>
+                <CoinItem v-for="coin in coins" :key="coin.id" v-model="selected" :id="coin.id" :image="coin.image"
+                    :amount="coin.amount" :price="coin.price" />
             </div>
             <div class="flex flex-col items-center py-2">
                 <a href="http://localhost:5173/register/registerProf"
