@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue'
 import Register from '@/views/Register.vue'
 import RegisterProf from '@/views/RegisterProf.vue'
 import LoginProf from '@/views/LoginProf.vue'
+import CoinHome from '@/views/Coin/CoinHome.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/register/loginProf',
     name: 'LoginProf',
     component: LoginProf,
+  },
+  {
+    path: '/coinHome',
+    name: 'coinHome',
+    component: CoinHome,
   },
 ]
 
