@@ -83,10 +83,12 @@ onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside)
 })
 
-//Кнопка назад ()
-const goBack = () => {
-    router.push('/register')
+//Кнопка выхода - 
+const logout = () => {
+    userStore.logout()
+    router.push('/')      // редирект на главную или любую другую страницу
 }
+
 </script>
 
 <style>
@@ -117,9 +119,9 @@ spline-viewer::part(branding) {
                 </div>
 
                 <div class="flex flex-col md:flex-row items-center justify-end gap-4">
-                    <button class="p-3 bg-[#cccccc]" @click="goBack">
+                    <a href="http://localhost:5173/register" class="p-3 bg-[#cccccc] inline-block">
                         Назад
-                    </button>
+                    </a>
                     <button @click="handleNext" class="p-3 bg-[#107c10] text-white">
                         Вперед
                     </button>
