@@ -73,7 +73,7 @@ const logout = () => {
                     <!-- Левая колонка -->
                     <ul class="flex flex-col w-full text-sm flex-1">
                         <li class="flex items-center gap-2 px-2 py-1">
-                            <img src="" alt="" class="w-6 h-6 rounded-full bg-gray-700" />
+                            <img src="/images/ProfImage.png" alt="" class="w-6 h-6 rounded-full bg-gray-700" />
                             <!-- показываем email, если есть -->
                             <p>{{ userStore.email || 'NameProfile' }}</p>
                         </li>
