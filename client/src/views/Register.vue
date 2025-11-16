@@ -103,7 +103,7 @@ spline-viewer::part(branding) {
                 <div class="flex flex-col md:flex-row justify-between items-stretch bg-black gap-4 md:gap-0">
                     <!-- Левый блок -->
                     <div class="bg-white text-black shadow-md p-6 md:p-8 w-full md:w-[400px] flex flex-col gap-6">
-                        <a href="#"
+                        <a href="http://localhost:5173/register/loginProf"
                             class="flex items-center justify-center text-white py-4 px-4 hover:opacity-90 transition text-sm md:text-base"
                             style="
       background: url('/images/button1.svg') no-repeat bottom left / 100% auto;

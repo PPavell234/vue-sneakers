@@ -3,16 +3,17 @@ import { ref, onMounted, onBeforeUnmount } from 'vue' // onMounted, onBeforeUnmo
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user' // импорт стора
 import '@/assets/main.css' //импорт стилей , нужно также для Spline элементов
-const router = useRouter()
-const userStore = useUserStore() // подключаем стор
+
 
 const email = ref('')
 const password = ref('')
+const router = useRouter()
+const userStore = useUserStore()
 
-const handleNext = async () => {
-    console.log("handleNext запущен!");
+//Вход -
+const handleLogin = async () => {
     try {
-        const res = await fetch('http://localhost:5000/api/auth/register', {
+        const res = await fetch('http://localhost:5000/api/auth/login', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -24,9 +25,9 @@ const handleNext = async () => {
         const data = await res.json()
 
         if (res.ok) {
-            alert("Регистрация успешна!")
+            alert("Вход выполнен!")
 
-            //Добавление почты
+            // сохраняем состояние пользователя
             userStore.setRegistered(true)
             userStore.setEmail(email.value)
 
@@ -81,6 +82,7 @@ onMounted(() => {
 });
 
 
+
 //Кнопка выхода - 
 const logout = () => {
     userStore.logout()
@@ -107,7 +109,8 @@ spline-viewer::part(branding) {
             class="text-white py-100 text-center bg-[url('/images/register_image.jpg')] bg-cover bg-center bg-no-repeat">
             <div class="bg-white text-black rounded-t-md md:p-10 max-w-[600px] mx-auto my-10 px-4">
                 <div>
-                    <p class="font-bold text-2xl mb-5">Укажите свой адрес электронной почты </p>
+                    <p class="font-bold text-2xl mb-5">Вход в учетную запись </p>
+
 
                     <input v-model="email" type="email" placeholder="someone@example.com"
                         class="my-5 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
@@ -120,7 +123,7 @@ spline-viewer::part(branding) {
                     <a href="http://localhost:5173/register" class="p-3 bg-[#cccccc] inline-block">
                         Назад
                     </a>
-                    <button @click="handleNext" class="p-3 bg-[#107c10] text-white">
+                    <button @click="handleLogin" class="p-3 bg-[#107c10] text-white">
                         Вперед
                     </button>
                 </div>
