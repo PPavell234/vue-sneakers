@@ -10,6 +10,10 @@ const authRoutes = require("./routes/auth");
 const app = express();
 const port = process.env.PORT || 5000;
 
+//Подключение БД
+const walletRoutes = require("./routes/wallet");
+app.use("/api/wallet", walletRoutes);
+
 // --- Middleware ---
 app.use(
   cors({
