@@ -1,17 +1,17 @@
-const User = require("../models/User");
+const User = require("../models/user"); // Теперь модель называется с маленькой буквы
 const Wallet = require("../models/Wallet");
 
 exports.addCoins = async (req, res) => {
   try {
     const { username, amount } = req.body;
 
-    const user = await User.findOne({ username }).populate("wallet");
+    // Ищем пользователя по email
+    const user = await User.findOne({ email: username }).populate("wallet");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Создаём кошелёк, если его нет
     if (!user.wallet) {
       const wallet = await Wallet.create({
         owner: user._id,

@@ -68,9 +68,50 @@ const coins = [
         image: "/images/CoinHome/coins.png",
         amount: 1000,
         price: 1000000000
+    },
+];
+
+//Оплата --
+async function pay() {
+    if (selected.value === null) {
+        alert("Выберите набор перед оплатой");
+        return;
     }
 
-];
+    const item = coins.find(c => c.id === selected.value);
+
+    try {
+        const res = await fetch("http://localhost:5000/api/wallet/add-coins", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                username: userStore.email,  // <-- email из store
+                amount: item.amount
+            })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            alert(data.message || "Ошибка оплаты");
+            return;
+        }
+
+        userStore.setWallet({
+            coins: data.coins
+        });
+
+        alert(`Баланс пополнен на ${item.amount}! Новый баланс: ${data.coins}`);
+
+    } catch (error) {
+        console.log(error);
+        alert("Ошибка соединения с сервером");
+    }
+}
+
+
+
+
 
 </script>
 
@@ -126,16 +167,16 @@ const coins = [
                     :amount="coin.amount" :price="coin.price" />
             </div>
             <div class="flex flex-col items-center py-2">
-                <a href="http://localhost:5173/register/registerProf"
+                <button @click="pay"
                     class="flex items-center justify-center text-black py-4 px-15 hover:opacity-90 transition text-sm md:text-base"
                     style="
-        background-image: url('/images/CoinHome/button1.png');
-        background-repeat: no-repeat;
-        background-position: center;
-       	background-size: cover;
-   ">
+            background-image: url('/images/CoinHome/button1.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        ">
                     ОПЛАТИТЬ
-                </a>
+                </button>
             </div>
 
 

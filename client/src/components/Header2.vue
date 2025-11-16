@@ -105,7 +105,8 @@ const logout = () => {
 
                                 <img src="/images/coin.svg" class="absolute left-1 top-1/2 -translate-y-1/2 w-4" />
 
-                                <div class="absolute left-6 top-1/2 -translate-y-1/2 text-white font-bold text-xs">1
+                                <div class="absolute left-6 top-1/2 -translate-y-1/2 text-white font-bold text-xs">
+                                    {{ userStore.wallet?.coins || 0 }}
                                 </div>
                             </div>
 

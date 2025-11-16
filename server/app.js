@@ -6,18 +6,15 @@ const path = require("path");
 
 const postRoutes = require("./routes/routes");
 const authRoutes = require("./routes/auth");
+const walletRoutes = require("./routes/wallet"); // подключение
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-//Подключение БД
-const walletRoutes = require("./routes/wallet");
-app.use("/api/wallet", walletRoutes);
-
 // --- Middleware ---
 app.use(
   cors({
-    origin: "http://localhost:5173", // адрес фронтенда Vite
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
@@ -39,6 +36,7 @@ mongoose
 // --- Роуты ---
 app.use("/api/post", postRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/wallet", walletRoutes); //
 
 // --- Тест ---
 app.get("/", (req, res) => {

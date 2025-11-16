@@ -1,9 +1,8 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-
   wallet: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Wallet",
@@ -11,5 +10,4 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// Фикс OverwriteModelError
-export default mongoose.models.user || mongoose.model("user", userSchema);
+module.exports = mongoose.model("user", UserSchema);

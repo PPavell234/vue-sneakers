@@ -5,6 +5,11 @@ export const useUserStore = defineStore('user', () => {
   const isRegistered = ref(false)
   const email = ref('')
 
+  // 💰 Добавляем кошелёк
+  const wallet = ref({
+    coins: 0,
+  })
+
   // Установка статуса регистрации
   const setRegistered = (value) => {
     isRegistered.value = value
@@ -17,16 +22,25 @@ export const useUserStore = defineStore('user', () => {
     localStorage.setItem('userEmail', value)
   }
 
-  // Функция выхода
+  // Сохранение кошелька
+  const setWallet = (value) => {
+    wallet.value = value
+    localStorage.setItem('userWallet', JSON.stringify(value))
+  }
+
+  // Выход
   const logout = () => {
     isRegistered.value = false
     email.value = ''
+    wallet.value = { coins: 0 }
 
     localStorage.removeItem('userRegistered')
     localStorage.removeItem('userEmail')
+    localStorage.removeItem('userWallet')
   }
 
-  // --- Восстановление при загрузке ---
+  // ---- Восстановление данных при загрузке ----
+
   if (localStorage.getItem('userRegistered') === 'true') {
     isRegistered.value = true
   }
@@ -36,5 +50,18 @@ export const useUserStore = defineStore('user', () => {
     email.value = savedEmail
   }
 
-  return { isRegistered, email, setRegistered, setEmail, logout }
+  const savedWallet = localStorage.getItem('userWallet')
+  if (savedWallet) {
+    wallet.value = JSON.parse(savedWallet)
+  }
+
+  return {
+    isRegistered,
+    email,
+    wallet,
+    setRegistered,
+    setEmail,
+    setWallet,
+    logout,
+  }
 })
