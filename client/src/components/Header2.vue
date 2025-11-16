@@ -30,7 +30,15 @@ onBeforeUnmount(() => {
 const userStore = useUserStore()
 
 
+//Функция выхода
+const logout = () => {
+    userStore.logout()
+    router.push('/')    // отправляем на главную
+}
+
 </script>
+
+//Если пользователь разегался
 
 <template>
     <!-- Шапка -->
@@ -81,7 +89,7 @@ const userStore = useUserStore()
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">АКТИВИРОВАТЬ</li>
                         <hr class="border-t border-[#33302F] w-full" />
 
-                        <li class="px-2 py-1 hover:text-green-500 cursor-pointer">
+                        <li class="px-2 py-1 hover:text-green-500 cursor-pointer" @click="logout">
                             <a href="http://localhost:5173/" class="block w-full h-full">ВЫЙТИ</a>
                         </li>
                         <hr class="border-t border-[#33302F] w-full" />

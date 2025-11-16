@@ -61,7 +61,9 @@ onBeforeUnmount(() => {
                             <a href="http://localhost:5173/register" class="block w-full h-full">ВОЙТИ</a>
                         </li>
                         <hr class="border-t border-[#33302F] w-full" />
-                        <li class="px-2 py-1 hover:text-green-500 cursor-pointer">СОЗДАТЬ АККУНТ</li>
+                        <li class="px-2 py-1 hover:text-green-500 cursor-pointer">
+                            <a href="http://localhost:5173/register">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+                        </li>
                         <hr class="border-t border-[#33302F] w-full" />
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">СКАЧАТЬ</li>
                         <hr class="border-t border-[#33302F] w-full" />
