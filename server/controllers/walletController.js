@@ -1,14 +1,17 @@
-const User = require("../models/user"); // Теперь модель называется с маленькой буквы
+const User = require("../models/user"); // Модель
 const Wallet = require("../models/Wallet");
 
 exports.addCoins = async (req, res) => {
   try {
     const { username, amount } = req.body;
 
+    console.log("Received data:", { username, amount }); // Логируем полученные данные
+
     // Ищем пользователя по email
     const user = await User.findOne({ email: username }).populate("wallet");
 
     if (!user) {
+      console.log("User not found for:", username); // Логируем, если пользователя нет
       return res.status(404).json({ message: "User not found" });
     }
 
@@ -38,7 +41,7 @@ exports.addCoins = async (req, res) => {
       history: wallet.history,
     });
   } catch (err) {
-    console.log(err);
+    console.log("Error:", err); // Логируем ошибку
     res.status(500).json({ message: "Server error" });
   }
 };
