@@ -1,171 +1,129 @@
+```markdown
 <div align="center">
-  
-  <h1>Minecraft website</h1>
-  <p>Full-stack web application built with MongoDB, Express, Vue.js, and Node.js 🚀</p>
 
-<!-- Badges -->
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT)
-![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/mevn_full_stack_app)
-![GitHub repo size](https://img.shields.io/github/repo-size/yourusername/mevn_full_stack_app)
-![GitHub stars](https://img.shields.io/github/stars/yourusername/mevn_full_stack_app?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/mevn_full_stack_app?style=social)
+  <h1>Vue Sneakers</h1>
+  <p>Мини‑проект — SPA магазин кроссовок: фронтенд на Vue, простой backend на Node/Express и MongoDB (MEVN‑подход).</p>
 
-<h4>
-    <a href="https://github.com/yourusername/mevn_full_stack_app/issues/new?template=bug_report.md&title=[BUG]">Report Bug</a>
-  <span> · </span>
-    <a href="https://github.com/yourusername/mevn_full_stack_app/issues/new?template=feature_request.md&title=[FR]">Request Feature</a>
-</h4>
+  <!-- Badges -->
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT)
+  ![GitHub last commit](https://img.shields.io/github/last-commit/PPavell234/vue-sneakers)
+  ![Repo size](https://img.shields.io/github/repo-size/PPavell234/vue-sneakers)
+  ![Language](https://img.shields.io/github/languages/top/PPavell234/vue-sneakers)
+
 </div>
 
 ---
 
-## 🌟 About the Project
+## О проекте
 
-**MEVN Full Stack App** — это учебный и демонстрационный проект, основанный на стеке:
-- **MongoDB** — база данных  
-- **Express.js** — серверная логика  
-- **Vue.js** — фронтенд  
-- **Node.js** — серверное окружение  
+Vue Sneakers — учебный/демонстрационный проект интернет‑магазина кроссовок. Показывает простую архитектуру с разделёнными frontend и backend частями, CRUD‑операциями и подключением к MongoDB.
 
-Проект демонстрирует, как можно связать backend и frontend в одном приложении, используя REST API и современные подходы к разработке на JavaScript.
-
+Цель: демонстрация работы с Vue (SPA), взаимодействия с REST API и базовой структуры full‑stack приложения.
 
 ---
 
-## ⚙️ Project Structure
+## Что внутри
+
+- Клиент: Vue (SPA)
+- Сервер: Node.js + Express (REST API)
+- База данных: MongoDB
+- Основные возможности: просмотр товаров, добавление/редактирование (CRUD) через API, простая корзина/интерфейс магазина
+
+---
+
+## Структура проекта (примерно)
 
 ```
-mevn_full_stack_app/
-│
+vue-sneakers/
 ├── client/      # Vue.js frontend
 │   ├── src/
 │   ├── public/
 │   └── package.json
-│
 ├── server/      # Node.js + Express backend
-│   ├── models/
 │   ├── routes/
+│   ├── models/
 │   └── package.json
-│
 └── README.md
 ```
 
----
-
-## 🧰 Tech Stack
-
-<details>
-<summary>Server</summary>
-<ul>
-  <li><a href="https://nodejs.org/">Node.js</a></li>
-  <li><a href="https://expressjs.com/">Express.js</a></li>
-  <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-  <li><a href="https://mongoosejs.com/">Mongoose</a></li>
-</ul>
-</details>
-
-<details>
-<summary>Client</summary>
-<ul>
-  <li><a href="https://vuejs.org/">Vue.js</a></li>
-  <li><a href="https://cli.vuejs.org/">Vue CLI</a></li>
-  <li><a href="https://vuetifyjs.com/">Vuetify</a></li>
-  <li><a href="https://axios-http.com/">Axios</a></li>
-</ul>
-</details>
-
-<details>
-<summary>Dev Tools</summary>
-<ul>
-  <li><a href="https://nodemon.io/">Nodemon</a></li>
-  <li><a href="https://eslint.org/">ESLint</a></li>
-  <li><a href="https://prettier.io/">Prettier</a></li>
-</ul>
-</details>
+(Если структура в репозитории отличается — подправлю по реальному содержимому.)
 
 ---
 
-## 🧭 Getting Started
+## Установка и запуск
 
-### 📦 Installation
-
-Клонируйте репозиторий и установите зависимости:
-
+1. Клонируйте репозиторий:
 ```bash
 git clone https://github.com/PPavell234/vue-sneakers.git
-cd .......\vue-sneakers
+cd vue-sneakers
 ```
 
----
-
-
-### 🖥️ Запуск сервера (Backend)
-
-Перейдите в директорию `server`:
+2. Запуск backend (если есть папка server):
 ```bash
-cd .......\vue-sneakers\server
+cd server
+npm install
+# создать файл .env (пример ниже)
+npm run dev
 ```
+По умолчанию сервер обычно слушает порт 5000 (http://localhost:5000).
 
-Установите зависимости и запустите сервер:
+3. Запуск frontend (если есть папка client):
 ```bash
+cd ../client
 npm install
 npm run dev
 ```
-
-По умолчанию сервер запустится на **http://localhost:5000**
+Клиент обычно доступен по адресу http://localhost:8080 (или как указано в конфигурации).
 
 ---
 
-### 💻 Запуск клиента (Frontend)
+## Переменные окружения (пример)
 
-Перейдите в директорию `client`:
-```bash
-cd .......\vue-sneakers\client
+В директории server создайте файл `.env` со значениями, примерно такими:
+```env
+DB_URL=mongodb://localhost:27017/vue-sneakers
+PORT=5000
 ```
 
-Установите зависимости и запустите клиент:
-```bash
-npm install
-npm run dev
+Если фронтенд ожидает адрес API, добавьте в client:
+```env
+VUE_APP_API_URL=http://localhost:5000/api
 ```
 
-Клиент будет доступен по адресу **http://localhost:8080**
+---
+
+## Полезные команды
+
+- Установить зависимости (server/client): npm install
+- Запустить в режиме разработки: npm run dev
+- Собрать фронтенд для продакшна: npm run build (в директории client)
 
 ---
 
-### 🗄️ Database Configuration (MongoDB)
+## Фичи / Todo (идеи для улучшения)
 
-Проект подключается к базе данных MongoDB через MongoDB Compass.
-Используется локальная база данных по адресу:
+- Аутентификация пользователей (JWT)
+- Управление заказами и пользователями
+- Улучшение стилей и адаптивности
+- Покрытие тестами (unit / e2e)
+- Docker‑окружение для локального запуска (Mongo + сервер + клиент)
 
-```bash
-DB_URL = mongodb://localhost:27017/vue-sneakers
-PORT = 5000
+---
+
+## Вклад
+
+Если хотите, выставляйте issues или открывайте pull requests. Подсказки:
+
+- Описывайте баг/фичу кратко и с шагами для воспроизведения.
+- Прежде чем менять крупные участки кода — обсудите в issue.
+
+---
+
+## Лицензия
+
+MIT © PPavell234
+
+---
+
+Сделано с ❤️
 ```
-
-
-Вы можете открыть MongoDB Compass, нажать "New Connection", и вставить строку подключения:
-
-**mongodb://localhost:27017/vue-sneakers**
-
-
-После запуска сервера вы сможете увидеть коллекции, создаваемые приложением в MongoDB.
-
----
-
-## Features
-
-✅ REST API  
-✅ CRUD операции  
-✅ Подключение к MongoDB  
-✅ UI с Vuetify  
-✅ Разделённый frontend и backend  
-
----
-
-
----
-
-<div align="center">
-  <b>Made with ❤️ using the MEVN stack</b>
-</div>
