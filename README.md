@@ -1,6 +1,6 @@
 <div align="center">
   
-  <h1>MEVN Full Stack App</h1>
+  <h1>Minecraft website</h1>
   <p>Full-stack web application built with MongoDB, Express, Vue.js, and Node.js 🚀</p>
 
 <!-- Badges -->
