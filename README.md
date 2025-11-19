@@ -1,4 +1,3 @@
-```markdown
 <div align="center">
 
   <h1>Vue Sneakers</h1>
@@ -33,7 +32,7 @@ Vue Sneakers — учебный/демонстрационный проект и
 
 ## Структура проекта (примерно)
 
-```
+```text
 vue-sneakers/
 ├── client/      # Vue.js frontend
 │   ├── src/
