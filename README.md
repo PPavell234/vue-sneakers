@@ -1,7 +1,7 @@
 <div align="center">
 
   <h1>Vue Sneakers - MinecraftWeb</h1>
-  <p>Мини‑проект — SPA магазин кроссовок: фронтенд на Vue, простой backend на Node/Express и MongoDB (MEVN‑подход).</p>
+  <p>--------------</p>
 
   <!-- Badges -->
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT)
