@@ -103,7 +103,7 @@ cd .......\vue-sneakers
 
 Перейдите в директорию `server`:
 ```bash
-cd .......\mevn_full_stack_app\server
+cd .......\vue-sneakers\server
 ```
 
 Установите зависимости и запустите сервер:
@@ -120,7 +120,7 @@ npm run dev
 
 Перейдите в директорию `client`:
 ```bash
-cd .......\mevn_full_stack_app\client
+cd .......\vue-sneakers\client
 ```
 
 Установите зависимости и запустите клиент:
