@@ -40,6 +40,7 @@ exports.addReaction = async (req, res) => {
 };
 
 // --- Получить реакцию ТЕКУЩЕГО пользователя ---
+//Даже если он перезайдет
 exports.getUserReaction = async (req, res) => {
   const { username } = req.query;
 
@@ -52,7 +53,27 @@ exports.getUserReaction = async (req, res) => {
 };
 
 // --- Получить ВСЕ реакции всех пользователей ---
+//Сохроняем подсвтку рекциии
 exports.getAllReactions = async (req, res) => {
-  const reactions = await Reaction.find();
-  res.json({ reactions });
+  try {
+    const { username } = req.query;
+
+    const user = await User.findOne({ email: username });
+
+    const reactions = await Reaction.find();
+
+    let myReaction = null;
+
+    if (user) {
+      myReaction = await Reaction.findOne({ owner: user._id });
+    }
+
+    res.json({
+      reactions,
+      myReaction,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error" });
+  }
 };

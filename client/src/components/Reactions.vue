@@ -29,22 +29,16 @@ onMounted(async () => {
     const res = await fetch(`http://localhost:5000/api/reactions/all?username=${userStore.email}`);
     const data = await res.json();
 
-    const all = data.reactions;
-    const mine = data.myReaction;
-
-    // Пересчитать все реакции всех пользователей
     counts.value = [0, 0, 0, 0];
-    all.forEach(r => {
-        const idx = reactionNames.indexOf(r.reaction);
-        if (idx !== -1) counts.value[idx]++;
+    data.reactions.forEach(r => {
+        const i = reactionNames.indexOf(r.reaction);
+        if (i !== -1) counts.value[i]++;
     });
 
-    // Показать мою реакцию
-    if (mine) {
-        activeIndex.value = reactionNames.indexOf(mine.reaction);
+    if (data.myReaction) {
+        activeIndex.value = reactionNames.indexOf(data.myReaction.reaction);
     }
 });
-
 
 
 
@@ -83,15 +77,13 @@ const selectIcon = async (index) => {
     closeGif()
     await nextTick()
 
-    // случайная гифка
     const randomGif = gifFiles[Math.floor(Math.random() * gifFiles.length)]
     gifSrc.value = `${randomGif}?t=${Date.now()}`
     showGif.value = true
 
-    // автозакрытие через 5 секунд
     gifTimer = setTimeout(() => closeGif(), 5000)
 
-    // Фиксированный запрос
+    // отправить реакцию
     await fetch("http://localhost:5000/api/reactions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -101,21 +93,22 @@ const selectIcon = async (index) => {
         })
     });
 
-    // ПЕРЕЗАГРУЖАЕМ ВСЕ РЕАКЦИИ
-    const res = await fetch("http://localhost:5000/api/reactions/all");
+    // загрузить ВСЕ реакции + мою
+    const res = await fetch(`http://localhost:5000/api/reactions/all?username=${userStore.email}`);
     const data = await res.json();
 
-    // ОБНОВЛЯЕМ СЧЁТЧИКИ
+    // пересчёт реакции всех пользователей
     counts.value = [0, 0, 0, 0];
     data.reactions.forEach(r => {
-        const idx = reactionNames.indexOf(r.reaction);
-        if (idx !== -1) counts.value[idx]++;
+        const i = reactionNames.indexOf(r.reaction);
+        if (i !== -1) counts.value[i]++;
     });
 
-    // ОБНОВЛЯЕМ МОЮ РЕАКЦИЮ
-    activeIndex.value = index;
-
-}
+    // активная реакция пользователя
+    if (data.myReaction) {
+        activeIndex.value = reactionNames.indexOf(data.myReaction.reaction);
+    }
+};
 </script>
 
 <style scoped>
