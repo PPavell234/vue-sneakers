@@ -26,15 +26,22 @@ let gifTimer = null
 const userStore = useUserStore();
 
 onMounted(async () => {
-    const res = await fetch("http://localhost:5000/api/reactions");
+    const res = await fetch(`http://localhost:5000/api/reactions/all?username=${userStore.email}`);
     const data = await res.json();
 
-    if (data.reaction) {
-        const index = reactionNames.indexOf(data.reaction);
-        if (index !== -1) {
-            activeIndex.value = index;
-            counts.value[index] = 1;
-        }
+    const all = data.reactions;
+    const mine = data.myReaction;
+
+    // Пересчитать все реакции всех пользователей
+    counts.value = [0, 0, 0, 0];
+    all.forEach(r => {
+        const idx = reactionNames.indexOf(r.reaction);
+        if (idx !== -1) counts.value[idx]++;
+    });
+
+    // Показать мою реакцию
+    if (mine) {
+        activeIndex.value = reactionNames.indexOf(mine.reaction);
     }
 });
 
