@@ -42,9 +42,9 @@ let gifTimer = null
 
 // список гифок
 const gifFiles = [
-    '/video/ednder2New1.gif',
-    '/video/ednder2New2.gif',
-    '/video/ednder2New3.gif'
+    '/video/ender1Gif.gif',
+    '/video/ender2Gif.gif',
+    '/video/ender3Gif.gif'
 ]
 
 // закрыть гифку
