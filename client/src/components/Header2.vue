@@ -79,7 +79,7 @@ const logout = () => {
                         </li>
 
                         <li class="px-2 py-1 hover:text-green-500 cursor-pointer">
-                            <a href="http://localhost:5173/register" class="block w-full h-full">ПРОФИЛЬ</a>
+                            <a href="http://localhost:5173/" class="block w-full h-full">ПРОФИЛЬ</a>
                         </li>
                         <hr class="border-t border-[#33302F] w-full" />
 
@@ -110,7 +110,9 @@ const logout = () => {
                                 </div>
                             </div>
 
-                            <img src="/images/add.png" class="size-5 w-5 cursor-pointer" />
+                            <a href="http://localhost:5173/coinHome">
+                                <img src="/images/add.png" class="size-5 w-5 cursor-pointer" />
+                            </a>
                         </li>
                     </ul>
 
