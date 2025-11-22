@@ -45,3 +45,34 @@ exports.addCoins = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+exports.getWallet = async (req, res) => {
+  try {
+    const { username } = req.query;
+
+    // Находим пользователя
+    const user = await User.findOne({ email: username });
+
+    if (!user) {
+      return res.json({ coins: 0 });
+    }
+
+    // Находим кошелек
+    let wallet = await Wallet.findOne({ owner: user._id });
+
+    // Если кошелька нет — создаем
+    if (!wallet) {
+      wallet = await Wallet.create({
+        owner: user._id,
+        coins: 0,
+        history: [],
+      });
+    }
+
+    res.json({
+      coins: wallet.coins,
+    });
+  } catch (err) {
+    console.log("Error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};

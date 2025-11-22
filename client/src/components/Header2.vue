@@ -3,6 +3,10 @@ import { ref, onMounted, nextTick, onBeforeUnmount } from 'vue'
 import { useUserStore } from '@/stores/user'
 
 
+//Почта ---
+//Тут должно быть userStore
+const userStore = useUserStore()
+
 const showMenu = ref(false)
 const toggleMenu = () => {
     showMenu.value = !showMenu.value
@@ -19,15 +23,18 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
     document.addEventListener('click', handleClickOutside)
-})
 
+    // Загрузка монет при заходе на страницу
+    if (userStore.email) {
+        userStore.loadWallet();
+    }
+});
 onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside)
 })
 
 
-//Почта ---
-const userStore = useUserStore()
+
 
 
 //Функция выхода

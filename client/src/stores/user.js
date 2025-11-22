@@ -28,6 +28,15 @@ export const useUserStore = defineStore('user', () => {
     localStorage.setItem('userWallet', JSON.stringify(value))
   }
 
+  //Обновелине монет
+  const loadWallet = async () => {
+    const res = await fetch(`http://localhost:5000/api/wallet/get?username=${email.value}`)
+    const data = await res.json()
+
+    wallet.value = { coins: data.coins || 0 }
+    localStorage.setItem('userWallet', JSON.stringify(wallet.value))
+  }
+
   // Выход
   const logout = () => {
     isRegistered.value = false
@@ -63,5 +72,7 @@ export const useUserStore = defineStore('user', () => {
     setEmail,
     setWallet,
     logout,
+    //Возращяем
+    loadWallet,
   }
 })
