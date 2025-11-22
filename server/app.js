@@ -36,7 +36,9 @@ mongoose
 // --- Роуты ---
 app.use("/api/post", postRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/wallet", walletRoutes); //
+app.use("/api/wallet", walletRoutes);
+app.use("/api/reactions", require("./routes/reactions"));
+//
 
 // --- Тест ---
 app.get("/", (req, res) => {
