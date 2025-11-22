@@ -1,8 +1,8 @@
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, onMounted } from 'vue'
 import { useUserStore } from "@/stores/user";
 
-const userStore = useUserStore();
+
 
 // список иконок реакций
 const icons = [
@@ -20,6 +20,25 @@ const counts = ref(icons.map(() => 0))
 const showGif = ref(false)
 const gifSrc = ref('')
 let gifTimer = null
+
+//Сохкр
+
+const userStore = useUserStore();
+
+onMounted(async () => {
+    const res = await fetch(`http://localhost:5000/api/reactions/user?username=${userStore.email}`);
+    const data = await res.json();
+
+    if (data.reaction) {
+        const index = reactionNames.indexOf(data.reaction.reaction);
+        if (index !== -1) {
+            activeIndex.value = index;
+            counts.value[index] = 1;
+        }
+    }
+});
+
+
 
 // список гифок
 const gifFiles = [
