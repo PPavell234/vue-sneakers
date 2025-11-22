@@ -1,26 +1,18 @@
 const User = require("../models/user");
 const Reaction = require("../models/Reaction");
 
-// --- Добавление реакции ---
+// --- Добавление или обновление реакции ---
 exports.addReaction = async (req, res) => {
   try {
     const { username, reaction } = req.body;
 
-    console.log("Received reaction:", { username, reaction });
-
-    // Ищем пользователя по email
     const user = await User.findOne({ email: username });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-    if (!user) {
-      console.log("User not found:", username);
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Ищем существующую реакцию
+    // Ищем реакцию пользователя
     let existingReaction = await Reaction.findOne({ owner: user._id });
 
     if (existingReaction) {
-      // обновляем реакцию
       existingReaction.reaction = reaction;
       await existingReaction.save();
 
@@ -31,7 +23,6 @@ exports.addReaction = async (req, res) => {
       });
     }
 
-    // если нет — создаём
     const newReaction = await Reaction.create({
       owner: user._id,
       reaction: reaction,
@@ -48,26 +39,20 @@ exports.addReaction = async (req, res) => {
   }
 };
 
-// --- Получение реакции пользователя ---
+// --- Получить реакцию ТЕКУЩЕГО пользователя ---
 exports.getUserReaction = async (req, res) => {
-  try {
-    const { username } = req.query;
+  const { username } = req.query;
 
-    console.log("Get reaction for:", username);
+  const user = await User.findOne({ email: username });
+  if (!user) return res.json({ reaction: null });
 
-    // Ищем пользователя
-    const user = await User.findOne({ email: username });
+  const reaction = await Reaction.findOne({ owner: user._id });
 
-    if (!user) {
-      return res.json({ reaction: null });
-    }
+  res.json({ reaction });
+};
 
-    // Находим реакцию юзера
-    const reaction = await Reaction.findOne({ owner: user._id });
-
-    return res.json({ reaction });
-  } catch (error) {
-    console.log("Get reaction error:", error);
-    res.status(500).json({ message: "Server error" });
-  }
+// --- Получить ВСЕ реакции всех пользователей ---
+exports.getAllReactions = async (req, res) => {
+  const reactions = await Reaction.find();
+  res.json({ reactions });
 };
