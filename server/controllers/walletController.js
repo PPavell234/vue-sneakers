@@ -15,17 +15,15 @@ exports.addCoins = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    if (!user.wallet) {
-      const wallet = await Wallet.create({
+    let wallet = await Wallet.findOne({ owner: user._id });
+
+    if (!wallet) {
+      wallet = await Wallet.create({
         owner: user._id,
         coins: 0,
+        history: [],
       });
-
-      user.wallet = wallet._id;
-      await user.save();
     }
-
-    const wallet = await Wallet.findById(user.wallet);
 
     wallet.coins += amount;
     wallet.history.push({
@@ -61,11 +59,7 @@ exports.getWallet = async (req, res) => {
 
     // Если кошелька нет — создаем
     if (!wallet) {
-      wallet = await Wallet.create({
-        owner: user._id,
-        coins: 0,
-        history: [],
-      });
+      return res.json({ coins: 0 });
     }
 
     res.json({

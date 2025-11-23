@@ -5,51 +5,54 @@ export const useUserStore = defineStore('user', () => {
   const isRegistered = ref(false)
   const email = ref('')
 
-  // 💰 Добавляем кошелёк
   const wallet = ref({
     coins: 0,
+    history: [],
   })
 
-  // Установка статуса регистрации
   const setRegistered = (value) => {
     isRegistered.value = value
     localStorage.setItem('userRegistered', value ? 'true' : 'false')
   }
 
-  // Сохранение email
   const setEmail = (value) => {
     email.value = value
     localStorage.setItem('userEmail', value)
   }
 
-  // Сохранение кошелька
+  // Исправление — НЕ заменяем объект!
   const setWallet = (value) => {
-    wallet.value = value
-    localStorage.setItem('userWallet', JSON.stringify(value))
-  }
-
-  //Обновелине монет
-  const loadWallet = async () => {
-    const res = await fetch(`http://localhost:5000/api/wallet/get?username=${email.value}`)
-    const data = await res.json()
-
-    wallet.value = { coins: data.coins || 0 }
+    wallet.value.coins = value.coins
+    wallet.value.history = value.history || []
     localStorage.setItem('userWallet', JSON.stringify(wallet.value))
   }
 
-  // Выход
+  const loadWallet = async () => {
+    if (!email.value) return
+
+    const res = await fetch(`http://localhost:5000/api/wallet/get?username=${email.value}`)
+    const data = await res.json()
+
+    wallet.value.coins = data.coins
+    wallet.value.history = data.history
+
+    localStorage.setItem('userWallet', JSON.stringify(wallet.value))
+  }
+
   const logout = () => {
     isRegistered.value = false
     email.value = ''
-    wallet.value = { coins: 0 }
+
+    // ❗ НЕ заменяем объект
+    wallet.value.coins = 0
+    wallet.value.history = []
 
     localStorage.removeItem('userRegistered')
     localStorage.removeItem('userEmail')
     localStorage.removeItem('userWallet')
   }
 
-  // ---- Восстановление данных при загрузке ----
-
+  // --- ВОССТАНОВЛЕНИЕ ---
   if (localStorage.getItem('userRegistered') === 'true') {
     isRegistered.value = true
   }
@@ -61,7 +64,9 @@ export const useUserStore = defineStore('user', () => {
 
   const savedWallet = localStorage.getItem('userWallet')
   if (savedWallet) {
-    wallet.value = JSON.parse(savedWallet)
+    const parsed = JSON.parse(savedWallet)
+    wallet.value.coins = parsed.coins
+    wallet.value.history = parsed.history || []
   }
 
   return {
@@ -72,7 +77,6 @@ export const useUserStore = defineStore('user', () => {
     setEmail,
     setWallet,
     logout,
-    //Возращяем
     loadWallet,
   }
 })

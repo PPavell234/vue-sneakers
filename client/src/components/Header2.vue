@@ -1,11 +1,16 @@
 <script setup>
-import { ref, onMounted, nextTick, onBeforeUnmount } from 'vue'
+import { ref, onMounted, nextTick, onBeforeUnmount, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
 
 
 //Почта ---
 //Тут должно быть userStore
 const userStore = useUserStore()
+
+console.log("HEADER STORE INSTANCE:", userStore)
+console.log("HEADER EMAIL:", userStore.email)
+console.log("HEADER COINS:", userStore.wallet.coins)
+
 
 const showMenu = ref(false)
 const toggleMenu = () => {
@@ -21,14 +26,19 @@ const handleClickOutside = (event) => {
     }
 }
 
-onMounted(() => {
-    document.addEventListener('click', handleClickOutside)
+watch(
+    () => userStore.email,
+    async (val) => {
+        if (!val) return;
+        console.log("📌 EMAIL появился:", val);
 
-    // Загрузка монет при заходе на страницу
-    if (userStore.email) {
-        userStore.loadWallet();
-    }
-});
+        await userStore.loadWallet();
+
+        console.log("📌 HEADER загрузил монеты:", userStore.wallet.coins);
+    },
+    { immediate: true }
+);
+
 onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside)
 })
