@@ -4,10 +4,25 @@ body {
   background-color: black;
 }
 
-img {
+/*Запрет на перетаскивание*/
+
+/* Отключает перетаскивание для всех элементов */
+* {
   -webkit-user-drag: none;
   user-drag: none;
 }
+
+/* Или только для определенных классов */
+.no-drag {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/*-------------------------------------*/
 
 spline-viewer::after {
   content: '';
