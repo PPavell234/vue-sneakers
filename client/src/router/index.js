@@ -4,6 +4,9 @@ import Register from '@/views/Register.vue'
 import RegisterProf from '@/views/RegisterProf.vue'
 import LoginProf from '@/views/LoginProf.vue'
 import CoinHome from '@/views/Coin/CoinHome.vue'
+import Error404 from '@/views/Error/Error404.vue'
+
+//  Каждый раз при создании страницы регистрации ее тут
 
 const routes = [
   {
@@ -30,6 +33,11 @@ const routes = [
     path: '/coinHome',
     name: 'coinHome',
     component: CoinHome,
+  },
+  {
+    path: '/error404',
+    name: 'error404',
+    component: Error404,
   },
 ]
 
