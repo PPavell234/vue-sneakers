@@ -5,7 +5,7 @@ import RegisterProf from '@/views/RegisterProf.vue'
 import LoginProf from '@/views/LoginProf.vue'
 import CoinHome from '@/views/Coin/CoinHome.vue'
 import Error404 from '@/views/Error/Error404.vue'
-import NoRegister from '@/views/Error/NoRegister.vue'
+import NoRegister from '@/components/NoRegister.vue'
 
 // Страницы, которые должны перенаправлять на 404
 const emptyPages = ['/old-page', '/deprecated', '/under-construction']
