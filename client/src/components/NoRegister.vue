@@ -35,21 +35,72 @@ const handleBackdropClick = (event) => {
     <div v-if="show" class="fixed inset-0 bg-black/70 flex justify-center items-center z-[10000] no-register-backdrop"
         @click="handleBackdropClick">
         <!-- Окно -->
-        <div class="w-[938px] h-[437px] bg-[#2f2d2c] flex flex-col items-center rounded-lg shadow-lg p-4 relative">
+        <div class="w-[938px] h-[500px] bg-[#2f2d2c] flex flex-col items-center rounded-lg shadow-lg p-4 relative">
+            <img src="/images/NoReg.png" alt="" class="fixed z-50" style="
+        left: 800px;
+        top: 1px;
+        pointer-events: none; 
+    ">
+            <!-- Свет фото -->
+            <img src="/images/Gradient.png" alt="" class="fixed z-50" style="
+    left: 600px;
+    top: 100px;
+    pointer-events: none;
+    width: 80px; /* конкретный размер */
+    height: auto; /* сохранить пропорции */
+    
+">
+            <img src="/images/Gradient.png" alt="" class="fixed z-50" style="
+    left: 100px;
+    top: 600px;
+    bottom: 100px;
+    pointer-events: none;
+    width: 80px; /* конкретный размер */
+    height: auto; /* сохранить пропорции */
+    
+">
+            <img src="/images/Gradient.png" alt="" class="fixed z-50" style="
+    left: 620px;
+    top: 700px;
+    bottom: 200px;
+    pointer-events: none;
+    width: 80px; /* конкретный размер */
+    height: auto; /* сохранить пропорции */
+    
+">
+            <img src="/images/Gradient.png" alt="" class="fixed z-50" style="
+    left: 1200px;
+    top: 600px;
+    bottom: 200px;
+    pointer-events: none;
+    width: 80px; /* конкретный размер */
+    height: auto; /* сохранить пропорции */
+    
+">
+            <img src="/images/Gradient.png" alt="" class="fixed z-50" style="
+    left: 1600px;
+    top: 200px;
+    bottom: 200px;
+    pointer-events: none;
+    width: 80px; /* конкретный размер */
+    height: auto; /* сохранить пропорции */
+    
+">
+
             <!-- Кнопка закрытия -->
             <button @click="closeModal"
                 class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300 transition">
                 ✕
             </button>
 
-            <h1 class="mb-12 mt-10 text-white p-14 text-6xl">Вы не авторизованы</h1>
+            <h1 class="mb-1 mt-20 text-white p-11 text-6xl">Вы не авторизованы</h1>
 
             <!-- Разделитель -->
             <div class="py-3 w-full">
-                <hr class="border-t-2 border-gray-400 my-1 w-[90%] mx-auto" />
+                <hr class="border-t-2 border-[#232221] my-1 w-[90%] mx-auto" />
             </div>
 
-            <div class="w-[90%] ml-auto mr-auto pr-50">
+            <div class="w-[90%] ml-auto mr-auto pr-50 my-2">
                 <p class="break-words text-white text-sm">
                     By opting in, you agree to receive communications from Minecraft. You can always unsubscribe.
                 </p>
