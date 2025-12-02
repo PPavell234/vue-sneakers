@@ -5,6 +5,7 @@ import RegisterProf from '@/views/RegisterProf.vue'
 import LoginProf from '@/views/LoginProf.vue'
 import CoinHome from '@/views/Coin/CoinHome.vue'
 import Error404 from '@/views/Error/Error404.vue'
+import NoRegister from '@/views/Error/NoRegister.vue'
 
 // Страницы, которые должны перенаправлять на 404
 const emptyPages = ['/old-page', '/deprecated', '/under-construction']
@@ -34,6 +35,11 @@ const routes = [
     path: '/coinHome',
     name: 'CoinHome',
     component: CoinHome,
+  },
+  {
+    path: '/noRegister',
+    name: 'noRegister',
+    component: NoRegister,
   },
   {
     path: '/error404',

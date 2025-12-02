@@ -1,8 +1,5 @@
 <script setup>
 import { ref, onMounted, nextTick, onBeforeUnmount } from 'vue' // onMounted, onBeforeUnmount - Для Spline-3D
-import VideoPlayer from '@/components/VideoPlayer.vue'
-import Reactions from '@/components/Reactions.vue'
-import Slider from '@/components/Slider.vue'
 import { useUserStore } from '@/stores/user'
 import Header from '@/components/Header.vue'
 import Header2 from '@/components/Header2.vue'
